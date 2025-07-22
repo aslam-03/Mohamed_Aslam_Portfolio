@@ -1,0 +1,284 @@
+/* Simple Space Background */
+.space-bg {
+  background: 
+    radial-gradient(ellipse at top, #0a0a1f 0%, #000000 70%),
+    radial-gradient(ellipse at bottom, #1a1a3a 0%, #000000 80%) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ensure space background persists through theme changes */
+section.space-bg,
+section:not(#home).space-bg {
+  background: 
+    radial-gradient(ellipse at top, #0a0a1f 0%, #000000 70%),
+    radial-gradient(ellipse at bottom, #1a1a3a 0%, #000000 80%) !important;
+}
+
+/* Floating Stars */
+.space-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(1.5px 1.5px at 20% 20%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 40% 10%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(2px 2px at 80% 30%, rgba(255,255,255,0.9), transparent),
+    radial-gradient(1px 1px at 10% 60%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1.5px 1.5px at 90% 70%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 60% 80%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(2px 2px at 30% 50%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 70% 15%, rgba(255,255,255,0.9), transparent),
+    radial-gradient(1.5px 1.5px at 15% 90%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 95% 50%, rgba(255,255,255,0.7), transparent);
+  background-size: 300px 300px;
+  animation: floatStars 80s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Twinkling Effect */
+.space-bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(1px 1px at 25% 35%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 75% 25%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 45% 85%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 85% 75%, rgba(255,255,255,0.2), transparent),
+    radial-gradient(1px 1px at 35% 65%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 65% 45%, rgba(255,255,255,0.3), transparent);
+  background-size: 200px 200px;
+  animation: twinkleStars 12s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Slow Floating Animation */
+@keyframes floatStars {
+  0% {
+    transform: translateX(0) translateY(0);
+    opacity: 1;
+  }
+  25% {
+    transform: translateX(-50px) translateY(-30px);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateX(-100px) translateY(20px);
+    opacity: 0.6;
+  }
+  75% {
+    transform: translateX(-50px) translateY(40px);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Gentle Twinkling */
+@keyframes twinkleStars {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  20% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+  40% {
+    opacity: 0.3;
+    transform: scale(0.9);
+  }
+  60% {
+    opacity: 0.8;
+    transform: scale(1.2);
+  }
+  80% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+}
+
+/* Interactive Hover Effects */
+.space-bg:hover::before {
+  animation-duration: 60s;
+}
+
+.space-bg:hover::after {
+  animation-duration: 8s;
+}
+
+/* Mouse Movement Interaction */
+.space-bg {
+  transition: all 0.3s ease;
+}
+
+.space-bg:hover {
+  background: 
+    radial-gradient(ellipse at top, #0f0f2a 0%, #000000 70%),
+    radial-gradient(ellipse at bottom, #2a2a4a 0%, #000000 80%);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .space-bg::before {
+    background-size: 200px 200px;
+    animation-duration: 100s;
+  }
+  
+  .space-bg::after {
+    background-size: 150px 150px;
+    animation-duration: 15s;
+  }
+}
+
+/* Scroll Animation Styles */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fade-in-up.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero Section Animations */
+@keyframes heroNameSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes heroTextFade {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroButtonsPop {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.hero-name-animate {
+  animation: heroNameSlide 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.hero-text-animate {
+  animation: heroTextFade 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+  opacity: 0;
+}
+
+.hero-buttons-animate {
+  animation: heroButtonsPop 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
+  opacity: 0;
+}
+
+/* Enhanced Section Animations */
+.fade-in-up:nth-child(1) {
+  transition-delay: 0s;
+}
+
+.fade-in-up:nth-child(2) {
+  transition-delay: 0.1s;
+}
+
+.fade-in-up:nth-child(3) {
+  transition-delay: 0.2s;
+}
+
+.fade-in-up:nth-child(4) {
+  transition-delay: 0.3s;
+}
+
+.fade-in-up:nth-child(5) {
+  transition-delay: 0.4s;
+}
+
+/* Card Animations within Sections */
+.fade-in-up.animate-in .grid > * {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: cardSlideUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.fade-in-up.animate-in .grid > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.fade-in-up.animate-in .grid > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.fade-in-up.animate-in .grid > *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.fade-in-up.animate-in .grid > *:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.fade-in-up.animate-in .grid > *:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.fade-in-up.animate-in .grid > *:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+@keyframes cardSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Section Heading Animations */
+.fade-in-up.animate-in h2 {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: headingSlide 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
+}
+
+@keyframes headingSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

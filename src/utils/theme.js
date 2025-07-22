@@ -1,0 +1,47 @@
+export const getThemeClasses = (theme, elementKey) => {
+  const themes = {
+    dark: {
+      body: "bg-gray-950 text-blue-300 cursor-retro-rocket",
+      nav: "bg-gray-900 bg-opacity-90 backdrop-blur-sm border-b-2 border-blue-600",
+      navText: "text-blue-400",
+      navItem: "text-blue-300 hover:bg-blue-900 hover:text-white",
+      navItemActive: "bg-blue-700 text-white shadow-lg",
+      sectionBgPrimary: "bg-gray-950",
+      sectionBgSecondary: "bg-gray-900",
+      heading: "text-cyan-300 border-blue-600",
+      paragraph: "text-blue-200",
+      buttonPrimary: "bg-blue-600 text-white hover:bg-blue-700 shadow-neon-blue",
+      buttonSecondary: "border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white",
+      cardBg: "bg-gray-800 border-2 border-blue-800",
+      cardTitle: "text-cyan-300",
+      cardText: "text-blue-200",
+      cardDate: "text-blue-400",
+      techTag: "bg-blue-800 text-blue-200",
+      input: "bg-gray-700 border-2 border-blue-500 text-blue-300 focus:ring-cyan-500",
+      footer: "bg-gray-900 text-blue-400 border-t-2 border-blue-600",
+      socialIcon: "text-blue-400 hover:text-cyan-300",
+    },
+    light: {
+      body: "bg-white text-gray-800",
+      nav: "bg-blue-50 bg-opacity-90 backdrop-blur-sm border-b-2 border-blue-300",
+      navText: "text-blue-700",
+      navItem: "text-gray-700 hover:bg-blue-100 hover:text-blue-800",
+      navItemActive: "bg-blue-700 text-white shadow-md",
+      sectionBgPrimary: "bg-white",
+      sectionBgSecondary: "bg-blue-50",
+      heading: "text-blue-800 border-blue-500",
+      paragraph: "text-gray-700",
+      buttonPrimary: "bg-blue-700 text-white hover:bg-blue-800 shadow-md",
+      buttonSecondary: "border-blue-700 text-blue-700 hover:bg-blue-700 hover:text-white",
+      cardBg: "bg-white border-2 border-blue-200",
+      cardTitle: "text-blue-700",
+      cardText: "text-gray-700",
+      cardDate: "text-blue-500",
+      techTag: "bg-blue-700 text-white",
+      input: "bg-white border-2 border-blue-300 text-gray-800 focus:ring-blue-600",
+      footer: "bg-blue-100 text-gray-600 border-t-2 border-blue-300",
+      socialIcon: "text-gray-600 hover:text-blue-700",
+    }
+  };
+  return themes[theme][elementKey] || '';
+};
