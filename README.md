@@ -150,8 +150,8 @@ Portfolio/
 
 ## 📞 Contact
 
-- **Email**: [your-email@example.com](mailto:your-email@example.com)
-- **LinkedIn**: [Your LinkedIn Profile](https://linkedin.com/in/yourprofile)
+- **Email**: [your-email@example.com](mailto:aslamachu8558@gmail.com)
+- **LinkedIn**: [Your LinkedIn Profile](www.linkedin.com/in/mohamed-aslam-i)
 - **GitHub**: [aslam-03](https://github.com/aslam-03)
 - **Portfolio**: [Live Demo](https://your-portfolio-url.com)
 
