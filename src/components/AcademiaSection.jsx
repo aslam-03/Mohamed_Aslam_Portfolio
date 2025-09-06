@@ -22,7 +22,7 @@ const AcademiaSection = ({ theme, getThemeClasses }) => (
         <ProjectCard 
           title="ClauseWise - AI-Powered Legal Document Analyzer" 
           description="Built an intelligent NLP-based tool to analyze contracts/NDAs..." 
-          technologies={['Python', 'NLP']} 
+          technologies={['Python', 'NLP', 'GeminiApi']} 
           date="MAY 2025" 
           theme={theme} 
           getThemeClasses={getThemeClasses} 

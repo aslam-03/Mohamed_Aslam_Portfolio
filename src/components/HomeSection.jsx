@@ -15,11 +15,11 @@ const HomeSection = ({ scrollToSection, theme, getThemeClasses }) => (
         Hi, I'm <br /><span className={theme === 'dark' ? 'text-blue-400' : 'text-blue-700'}>MOHAMED ASLAM I</span>
       </h1>
       <p className={`${getThemeClasses('paragraph')} text-xl mb-8 animate-fade-in-up delay-200 font-vt323`}>
-        Aspiring AI and Data Science Undergraduate with hands-on experience in machine learning, Generative AI, and Python-based projects.
+        Aspiring AI and Data Science Undergraduate with hands-on experience in Machine learning, Generative AI, and Fullstack projects.
       </p>
       <div className="flex justify-center space-x-4 animate-fade-in-up delay-400">
         <a 
-          href="./Mohamed Aslam.pdf" 
+          href="./Mohamed_Aslam_Resume.pdf" 
           download="Mohamed_Aslam_Resume.pdf" 
           className={`${getThemeClasses('buttonPrimary')} inline-flex items-center px-6 py-3 font-semibold rounded-lg transition-all duration-300 transform hover:scale-105`}
         >
@@ -37,3 +37,4 @@ const HomeSection = ({ scrollToSection, theme, getThemeClasses }) => (
 );
 
 export default HomeSection;
+

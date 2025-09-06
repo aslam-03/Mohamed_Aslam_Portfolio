@@ -57,19 +57,40 @@ const ExperienceCard = ({ title, company, duration, achievements, theme, getThem
   </div>
 );
 
-const SkillCard = ({ skill, theme, getThemeClasses }) => (
-  <div
-    className={`${getThemeClasses('cardBg')} rounded-lg shadow-md p-6 text-center min-h-[70px] flex items-center justify-center transform transition-transform duration-300 hover:scale-105 hover:shadow-xl`}
-    style={{ fontSize: '1.12rem', padding: '2rem', minWidth: '320px', maxWidth: '100%' }}
-  >
-    <h3
-      className={`${getThemeClasses('cardTitle')} font-press-start font-semibold`}
-      style={{ fontSize: '1.08rem', lineHeight: '1.3', wordBreak: 'break-word', whiteSpace: 'normal' }}
+import getSkillIcon from './SkillIcons';
+
+const SkillCard = ({ skill, theme, getThemeClasses }) => {
+  const words = skill.trim().split(/\s+/);
+  const singleWord = words.length === 1;
+  const containerStyle = { fontSize: '1rem', padding: '1.25rem', minWidth: 200, width: 'clamp(220px, 24vw, 360px)' };
+  const singleStyle = { fontSize: '1.02rem', lineHeight: '1.2', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' };
+  const multiStyle = { fontSize: '1.02rem', lineHeight: '1.2', whiteSpace: 'normal' };
+
+  return (
+    <div
+      className={`${getThemeClasses('cardBg')} rounded-lg shadow-md p-6 text-center transform transition-transform duration-300 hover:scale-105 hover:shadow-xl flex flex-col items-center justify-center`}
+      style={containerStyle}
     >
-      {skill}
-    </h3>
-  </div>
-);
+      <div className="mb-3 flex items-center justify-center" style={{ minHeight: 56 }}>
+        {getSkillIcon(skill, { size: 56 })}
+      </div>
+      <h3
+        className={`${getThemeClasses('cardTitle')} font-press-start font-semibold`}
+        style={singleWord ? singleStyle : multiStyle}
+      >
+        {singleWord ? (
+          skill
+        ) : (
+          <>
+            <span>{words[0]}</span>
+            <br />
+            <span>{words.slice(1).join(' ')}</span>
+          </>
+        )}
+      </h3>
+    </div>
+  );
+};
 
 const ContactInfoItem = ({ icon: Icon, label, value, link, theme, getThemeClasses }) => (
   <div className={`${getThemeClasses('cardBg')} flex items-center space-x-4 p-4 rounded-lg shadow-inner`}>
