@@ -1,6 +1,7 @@
 import React from 'react';
 import dagshubLogo from '../assets/logos/dagshub.png';
-
+import css from '../assets/logos/css3.png';
+import vscode from '../assets/logos/vscode2.png'; 
 const Badge = ({ children, size = 48, bg = '#111827', color = 'white' }) => {
   const text = String(children || '');
   // reduce font size for longer labels so they fit inside the circle
@@ -129,11 +130,13 @@ export function getSkillIcon(skill, props = {}) {
   if (s.includes('python')) return <LogoImg src="https://cdn.simpleicons.org/python/3776AB.svg" alt="Python" {...props} />;
   if (s.includes('javascript') || s === 'js') return <LogoImg src="https://cdn.simpleicons.org/javascript/F7DF1E.svg" alt="JavaScript" {...props} />;
   if (s.includes('html')) return <LogoImg src="https://cdn.simpleicons.org/html5/E34F26.svg" alt="HTML5" {...props} />;
-  if (s.includes('css')) return <LogoImg src="https://cdn.simpleicons.org/css3/1572B6.svg" alt="CSS3" {...props} />;
+  if (s.includes('css')) return <LogoImg src={css} alt="CSS3" {...props} />;
+  // if (s.includes('css')) return <LogoImg src="https://cdn.simpleicons.org/css3/1572B6.svg" alt="CSS3" {...props} />;
   if (s.includes('git') && !s.includes('github')) return <LogoImg src="https://cdn.simpleicons.org/git/F05032.svg" alt="Git" {...props} />;
   if (s.includes('github')) return <LogoImg src="https://cdn.simpleicons.org/github/111827.svg" alt="GitHub" {...props} />;
   if (s.includes('docker')) return <LogoImg src="https://cdn.simpleicons.org/docker/2496ED.svg" alt="Docker" {...props} />;
-  if (s.includes('vs code') || s.includes('vscode')) return <LogoImg src="https://cdn.simpleicons.org/visualstudiocode/007ACC.svg" alt="VS Code" {...props} />;
+  if (s.includes('vscode')) return <LogoImg src={vscode} alt="VS Code" {...props} />;
+  // if (s.includes('vs code') || s.includes('vscode')) return <LogoImg src="https://cdn.simpleicons.org/visualstudiocode/007ACC.svg" alt="VS Code" {...props} />;
   if (s.includes('dagshub')) return <LogoImg src={dagshubLogo} alt="DagsHub" {...props} />;
   if (s.includes('n8n')) return <LogoImg src="https://cdn.simpleicons.org/n8n/FF6A00.svg" alt="n8n" {...props} />;
   if (s.includes('machine learning') || s.includes('machine-learning') || s === 'machine' || s === 'ml') return <LogoImg src="https://cdn.simpleicons.org/microsoftazure/0089D6.svg" alt="ML" {...props} />;

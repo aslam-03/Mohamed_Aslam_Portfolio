@@ -58,6 +58,7 @@ const ExperienceCard = ({ title, company, duration, achievements, theme, getThem
 );
 
 import getSkillIcon from './SkillIcons';
+import CertificateModal from './CertificateModal';
 
 const SkillCard = ({ skill, theme, getThemeClasses }) => {
   const words = skill.trim().split(/\s+/);
@@ -111,7 +112,8 @@ const ContactInfoItem = ({ icon: Icon, label, value, link, theme, getThemeClasse
   </div>
 );
 
-const CertificationCard = ({ title, provider, description, date, theme, getThemeClasses, certificateUrl }) => (
+// Removed duplicate CertificationCard definition. Only the new one with onViewCertificate is kept.
+const CertificationCard = ({ title, provider, description, date, theme, getThemeClasses, certificateUrl, onViewCertificate }) => (
   <div className={`${getThemeClasses('cardBg')} text-left rounded-xl shadow-lg p-6 transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl flex flex-col justify-between h-full`}>
     <div>
       <div className="mb-4">
@@ -135,10 +137,8 @@ const CertificationCard = ({ title, provider, description, date, theme, getTheme
           Certified
         </span>
         {certificateUrl && (
-          <a
-            href={certificateUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => onViewCertificate(certificateUrl)}
             className={`px-3 py-1 rounded font-bold transition-colors duration-200 text-center shadow-neon-blue text-sm
               ${theme === 'dark' 
                 ? 'bg-gray-900 text-white hover:bg-gray-800' 
@@ -146,7 +146,7 @@ const CertificationCard = ({ title, provider, description, date, theme, getTheme
             style={{ textDecoration: 'none' }}
           >
             View Certificate
-          </a>
+          </button>
         )}
       </div>
     </div>
