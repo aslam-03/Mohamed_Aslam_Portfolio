@@ -21,13 +21,13 @@ const CertificationsSection = ({ theme, getThemeClasses }) => {
   return (
     <section 
       id="certifications" 
-      className={`${getThemeClasses('sectionBgSecondary')} py-20 px-8 transition-colors duration-300`}
+      className={`${getThemeClasses('sectionBgSecondary')} py-10 px-2 sm:px-4 md:px-8 transition-colors duration-300`}
     >
       <div className="container mx-auto text-center">
-        <h2 className={`${getThemeClasses('heading')} text-4xl font-bold mb-12 border-b-4 pb-4 inline-block font-press-start`}>
+        <h2 className={`${getThemeClasses('heading')} text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-10 md:mb-12 border-b-4 pb-2 sm:pb-4 inline-block font-press-start`}>
           Certifications
         </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 max-w-6xl mx-auto">
           <CertificationCard 
             title="AWS: Generative AI Foundation" 
             provider="Amazon Web Services"

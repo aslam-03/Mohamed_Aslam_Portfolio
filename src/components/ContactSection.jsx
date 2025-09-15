@@ -55,17 +55,17 @@ const ContactSection = ({ theme, getThemeClasses }) => {
   return (
     <section 
       id="contact" 
-      className={`${getThemeClasses('sectionBgPrimary')} py-20 px-8 transition-colors duration-300`}
+      className={`${getThemeClasses('sectionBgPrimary')} py-10 px-2 sm:px-4 md:px-8 transition-colors duration-300`}
     >
       <div className="container mx-auto text-center">
-        <h2 className={`${getThemeClasses('heading')} text-4xl font-bold mb-12 border-b-4 pb-4 inline-block font-press-start`}>
+        <h2 className={`${getThemeClasses('heading')} text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-10 md:mb-12 border-b-4 pb-2 sm:pb-4 inline-block font-press-start`}>
           Contact Me
         </h2>
-        <div className={`max-w-3xl mx-auto p-8 rounded-xl shadow-lg border transition-colors duration-300 ${getThemeClasses('cardBg')}`}>
+        <div className={`max-w-3xl mx-auto p-4 sm:p-6 md:p-8 rounded-xl shadow-lg border transition-colors duration-300 ${getThemeClasses('cardBg')}`}>
           <p className={`${getThemeClasses('paragraph')} text-lg text-center mb-8 font-vt323`}>
             Feel free to reach out for collaborations, job opportunities, or just to say hello!
           </p>
-        <div className="grid md:grid-cols-2 gap-8 mb-12 text-left">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12 text-left">
           <ContactInfoItem 
             icon={Mail} 
             label="Email" 

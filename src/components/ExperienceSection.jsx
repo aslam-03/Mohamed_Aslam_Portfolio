@@ -3,13 +3,13 @@ import { ExperienceCard } from './Cards';
 const ExperienceSection = ({ theme, getThemeClasses }) => (
   <section 
     id="experience" 
-    className={`${getThemeClasses('sectionBgPrimary')} py-20 px-8 transition-colors duration-300`}
+    className={`${getThemeClasses('sectionBgPrimary')} py-10 px-2 sm:px-4 md:px-8 transition-colors duration-300`}
   >
     <div className="container mx-auto text-center">
-      <h2 className={`${getThemeClasses('heading')} text-4xl font-bold mb-12 border-b-4 pb-4 inline-block font-press-start`}>
+      <h2 className={`${getThemeClasses('heading')} text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-10 md:mb-12 border-b-4 pb-2 sm:pb-4 inline-block font-press-start`}>
         Professional Experience
       </h2>
-      <div className="space-y-12 max-w-4xl mx-auto text-left">
+      <div className="space-y-8 sm:space-y-10 md:space-y-12 max-w-4xl mx-auto text-left">
         <ExperienceCard 
           title="Frontend Developer Virtual Internship" 
           company="Ceeras IT Services" 

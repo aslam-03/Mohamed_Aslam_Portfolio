@@ -1,42 +1,83 @@
-const ProjectCard = ({ title, description, technologies, date, theme, getThemeClasses, githubUrl }) => (
-  <div className={`${getThemeClasses('cardBg')} text-left rounded-xl shadow-lg p-6 flex flex-col justify-between h-full transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl`}>
-    <div>
-      <h3 className={`${getThemeClasses('cardTitle')} text-xl font-bold mb-3 font-press-start`}>
-        {title}
-      </h3>
-      <p className={`${getThemeClasses('cardDate')} text-sm mb-2 font-vt323`}>
-        {date}
-      </p>
-      <p className={`${getThemeClasses('cardText')} mb-4 font-vt323`}>
-        {description}
-      </p>
-      <div className="flex flex-wrap gap-2 mb-4">
-        {technologies.map((tech, index) => 
-          <span 
-            key={index} 
-            className={`${getThemeClasses('techTag')} text-xs font-semibold px-3 py-1 rounded-full`}
-          >
-            {tech}
-          </span>
-        )}
+import React, { useState } from 'react';
+
+const ProjectCard = ({ title, description, technologies, date, theme, getThemeClasses, githubUrl, about, aboutDetails }) => {
+  const [showModal, setShowModal] = useState(false);
+  return (
+    <div className={`${getThemeClasses('cardBg')} text-left rounded-xl shadow-lg p-6 flex flex-col justify-between h-full transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl`}>
+      <div>
+        <h3 className={`${getThemeClasses('cardTitle')} text-xl font-bold mb-3 font-press-start`}>
+          {title}
+        </h3>
+        <p className={`${getThemeClasses('cardDate')} text-sm mb-2 font-vt323`}>
+          {date}
+        </p>
+        <p className={`${getThemeClasses('cardText')} mb-4 font-vt323`}>
+          {description}
+        </p>
+        <div className="flex flex-wrap gap-2 mb-4">
+          {technologies.map((tech, index) => 
+            <span 
+              key={index} 
+              className={`${getThemeClasses('techTag')} text-xs font-semibold px-3 py-1 rounded-full`}
+            >
+              {tech}
+            </span>
+          )}
+        </div>
       </div>
+      <div className="flex items-center justify-between mt-2">
+        {githubUrl && (
+          <a
+            href={githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`px-3 py-1 rounded font-bold text-xs transition-colors duration-200 shadow-neon-blue
+              ${theme === 'dark' 
+                ? 'bg-gray-900 text-white hover:bg-gray-800' 
+                : 'bg-white text-gray-900 border border-gray-300 hover:bg-gray-100'}`}
+            style={{ textDecoration: 'none', minWidth: 90, textAlign: 'center' }}
+          >
+            GitHub
+          </a>
+        )}
+        <button
+          onClick={() => setShowModal(true)}
+          className={`px-3 py-1 rounded font-bold text-xs transition-colors duration-200 shadow-neon-blue ml-auto
+            ${theme === 'dark' 
+              ? 'bg-blue-900 text-white hover:bg-blue-800' 
+              : 'bg-blue-100 text-blue-900 border border-blue-300 hover:bg-blue-200'}`}
+          style={{ minWidth: 90 }}
+        >
+          About Project
+        </button>
+      </div>
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm animate-fade-in">
+          <div
+            className="relative bg-white dark:bg-gray-900 rounded-lg shadow-2xl p-6 max-w-lg w-full animate-pop-up"
+            style={
+              title.includes('ClauseWise')
+                ? { maxHeight: '80vh', overflowY: 'auto' }
+                : undefined
+            }
+          >
+            <button
+              onClick={() => setShowModal(false)}
+              className="absolute top-2 right-2 text-gray-700 dark:text-gray-200 hover:text-red-500 text-2xl font-bold focus:outline-none"
+              aria-label="Close"
+            >
+              &times;
+            </button>
+            <h3 className="text-xl font-bold mb-2 font-press-start text-gray-900 dark:text-white">{title}</h3>
+            <div className="text-sm text-gray-700 dark:text-gray-200 font-vt323 whitespace-pre-line">
+              {aboutDetails}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
-    {githubUrl && (
-      <a
-        href={githubUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`mt-4 inline-block px-4 py-2 rounded font-bold transition-colors duration-200 text-center shadow-neon-blue
-          ${theme === 'dark' 
-            ? 'bg-gray-900 text-white hover:bg-gray-800' 
-            : 'bg-white text-gray-900 border border-gray-300 hover:bg-gray-100'}`}
-        style={{ textDecoration: 'none' }}
-      >
-        View In Github
-      </a>
-    )}
-  </div>
-);
+  );
+};
 
 const ExperienceCard = ({ title, company, duration, achievements, theme, getThemeClasses }) => (
   <div className={`${getThemeClasses('cardBg')} rounded-xl shadow-lg p-8 transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl`}>

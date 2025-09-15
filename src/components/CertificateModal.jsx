@@ -24,7 +24,7 @@ const CertificateModal = ({ isOpen, onClose, certificate }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm animate-fade-in">
-      <div className="relative bg-white dark:bg-gray-900 rounded-lg shadow-2xl p-0 max-w-4xl w-full animate-pop-up overflow-hidden">
+  <div className="relative bg-white dark:bg-gray-900 rounded-lg shadow-2xl p-0 max-w-4xl w-full animate-pop-up overflow-hidden max-h-[80vh] overflow-y-auto">
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-700 dark:text-gray-200 hover:text-red-500 text-2xl font-bold focus:outline-none z-10"
