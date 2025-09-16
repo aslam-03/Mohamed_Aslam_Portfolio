@@ -7,6 +7,16 @@
   overflow: hidden;
 }
 
+/* Ensure unified content wrapper renders stars behind children */
+#content-wrapper.space-bg {
+  position: relative;
+  z-index: 0;
+}
+#content-wrapper.space-bg > * {
+  position: relative;
+  z-index: 2;
+}
+
 /* Ensure space background persists through theme changes */
 section.space-bg,
 section:not(#home).space-bg {
@@ -116,6 +126,48 @@ section:not(#home).space-bg {
 
 .space-bg:hover::after {
   animation-duration: 8s;
+}
+
+/* Add spacing between sections when scrolling */
+#content-wrapper > section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  position: relative;
+}
+
+/* Add responsive spacing between sections */
+@media (min-width: 768px) {
+  #content-wrapper > section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  #content-wrapper > section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+/* Allow individual sections to override padding if needed */
+#content-wrapper > section.custom-padding {
+  padding-top: var(--padding-top, 3rem);
+  padding-bottom: var(--padding-bottom, 3rem);
+}
+
+/* Responsive adjustments for the unified background */
+@media (max-width: 640px) {
+  .space-bg::before,
+  .space-bg::after {
+    background-size: 200px 200px;
+    animation-duration: 120s;
+  }
+  
+  #content-wrapper > section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
 /* Mouse Movement Interaction */

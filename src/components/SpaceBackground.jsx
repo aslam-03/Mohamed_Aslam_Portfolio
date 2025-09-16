@@ -4,30 +4,18 @@ import './SpaceBackground.css';
 const SpaceBackground = () => {
   useEffect(() => {
     const applyBackgroundBasedOnTheme = () => {
-      const sections = document.querySelectorAll('section:not(#home)');
+      const wrapper = document.getElementById('content-wrapper');
       const body = document.body;
-      
-      // Check if current theme is dark by looking for the correct theme class
-      const isDarkTheme = body.classList.contains('dark-theme') || 
-                         body.className.includes('dark-theme');
-      
-      console.log('Theme check:', { 
-        bodyClasses: body.className, 
-        isDarkTheme,
-        sectionsFound: sections.length 
-      });
-      
-      sections.forEach(section => {
-        if (isDarkTheme) {
-          // Apply space background only in dark theme
-          section.classList.add('space-bg');
-          console.log('Added space-bg to:', section.id);
-        } else {
-          // Remove space background in light theme
-          section.classList.remove('space-bg');
-          console.log('Removed space-bg from:', section.id);
-        }
-      });
+      // Theme is managed by body className being either 'dark-theme' or 'light-theme' like patterns
+      const isDarkTheme = body.className.includes('dark');
+
+      if (!wrapper) return;
+
+      if (isDarkTheme) {
+        wrapper.classList.add('space-bg');
+      } else {
+        wrapper.classList.remove('space-bg');
+      }
     };
 
     // Apply background initially with a small delay
@@ -72,9 +60,11 @@ const SpaceBackground = () => {
     return () => {
       const sections = document.querySelectorAll('section');
       sections.forEach(section => {
-        section.classList.remove('space-bg', 'fade-in-up', 'animate-in');
+        section.classList.remove('fade-in-up', 'animate-in');
         scrollObserver.unobserve(section);
       });
+      const wrapper = document.getElementById('content-wrapper');
+      if (wrapper) wrapper.classList.remove('space-bg');
       themeObserver.disconnect();
     };
   }, []);

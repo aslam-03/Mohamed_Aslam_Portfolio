@@ -44,7 +44,7 @@ const ScrollToTop = () => {
     >
       {/* Arrow SVG */}
       <svg
-        className="w-6 h-6 transition-transform duration-300 group-hover:-translate-y-0.5"
+        className="w-6 h-6 transform transition-all duration-500 ease-in-out group-hover:-translate-y-1"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"

@@ -39,7 +39,7 @@ const CertificateModal = ({ isOpen, onClose, certificate }) => {
               <img 
                 src={certificateUrl} 
                 alt="Certificate" 
-                className="max-h-[60vh] w-auto rounded-lg shadow-xl transition-transform duration-700 animate-certificate-rotate"
+                className="max-h-[60vh] w-auto rounded-lg shadow-xl transform transition-all duration-700 ease-in-out animate-certificate-rotate"
                 style={{ transformOrigin: 'center left' }}
               />
             )}

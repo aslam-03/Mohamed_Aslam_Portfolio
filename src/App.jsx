@@ -11,6 +11,7 @@ import ShootingStarCursor from './components/ShootingStarCursor';
 import ScrollToTop from './components/ScrollToTop';
 import SpaceBackground from './components/SpaceBackground';
 import { getThemeClasses } from './utils/theme';
+import { ModalProvider } from './utils/ModalContext';
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -33,7 +34,7 @@ function App() {
 
   const themeClasses = (elementKey) => getThemeClasses(theme, elementKey);
 
-  const allSections = ['home', 'academia', 'experience', 'skills', 'contact'];
+  const allSections = ['home', 'academia', 'experience', 'skills', 'certifications', 'contact'];
   
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -56,15 +57,16 @@ function App() {
   }, []);
 
   return (
-    <div className={`${themeClasses('body')} transition-colors duration-300`}>
-      <ShootingStarCursor />
-      <Navigation 
-        activeSection={activeSection}
-        scrollToSection={scrollToSection}
-        theme={theme}
-        toggleTheme={toggleTheme}
-        getThemeClasses={themeClasses}
-      />
+    <ModalProvider>
+      <div className={`${themeClasses('body')} transition-colors duration-300`}>
+        <ShootingStarCursor />
+        <Navigation 
+          activeSection={activeSection}
+          scrollToSection={scrollToSection}
+          theme={theme}
+          toggleTheme={toggleTheme}
+          getThemeClasses={themeClasses}
+        />
 
       <main className="pt-16">
         <HomeSection 
@@ -72,31 +74,33 @@ function App() {
           theme={theme}
           getThemeClasses={themeClasses}
         />
-        
-        <AcademiaSection 
-          theme={theme}
-          getThemeClasses={themeClasses}
-        />
-        
-        <ExperienceSection 
-          theme={theme}
-          getThemeClasses={themeClasses}
-        />
-        
-        <SkillsSection 
-          theme={theme}
-          getThemeClasses={themeClasses}
-        />
-        
-        <CertificationsSection 
-          theme={theme}
-          getThemeClasses={themeClasses}
-        />
-        
-        <ContactSection 
-          theme={theme}
-          getThemeClasses={themeClasses}
-        />
+        {/* Unified background wrapper for all sections except hero */}
+        <div id="content-wrapper" className="unified-bg relative min-h-screen">
+          <AcademiaSection 
+            theme={theme}
+            getThemeClasses={themeClasses}
+          />
+          
+          <ExperienceSection 
+            theme={theme}
+            getThemeClasses={themeClasses}
+          />
+          
+          <SkillsSection 
+            theme={theme}
+            getThemeClasses={themeClasses}
+          />
+          
+          <CertificationsSection 
+            theme={theme}
+            getThemeClasses={themeClasses}
+          />
+          
+          <ContactSection 
+            theme={theme}
+            getThemeClasses={themeClasses}
+          />
+        </div>
       </main>
 
       <footer className={`${themeClasses('footer')} py-8 text-center transition-colors duration-300`}>
@@ -108,9 +112,10 @@ function App() {
       {/* Scroll to Top Button */}
       <ScrollToTop />
       
-      {/* Space Background for all sections except hero */}
+      {/* Space Background for unified wrapper (all sections except hero) */}
       <SpaceBackground />
     </div>
+    </ModalProvider>
   );
 }
 

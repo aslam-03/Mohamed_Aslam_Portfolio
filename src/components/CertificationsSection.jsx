@@ -1,27 +1,11 @@
 import { CertificationCard } from './Cards';
-import React, { useState } from 'react';
-import CertificateModal from './CertificateModal';
-
+import React from 'react';
 
 const CertificationsSection = ({ theme, getThemeClasses }) => {
-
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalData, setModalData] = useState(null);
-
-  const handleViewCertificate = (certificate) => {
-    setModalData(certificate);
-    setModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalOpen(false);
-    setModalData(null);
-  };
-
   return (
     <section 
       id="certifications" 
-      className={`${getThemeClasses('sectionBgSecondary')} py-10 px-2 sm:px-4 md:px-8 transition-colors duration-300`}
+      className={`bg-transparent py-10 px-2 sm:px-4 md:px-8 transition-colors duration-500`}
     >
       <div className="container mx-auto text-center">
         <h2 className={`${getThemeClasses('heading')} text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-10 md:mb-12 border-b-4 pb-2 sm:pb-4 inline-block font-press-start`}>
@@ -36,13 +20,13 @@ const CertificationsSection = ({ theme, getThemeClasses }) => {
             theme={theme} 
             getThemeClasses={getThemeClasses}
             certificateUrl="/certificates/AWS.png"
-            onViewCertificate={() => handleViewCertificate({
+            certificateData={{
               title: 'AWS: Generative AI Foundation',
               provider: 'Amazon Web Services',
               description: 'Foundational knowledge of generative AI concepts and AWS AI services',
               date: '2025',
               certificateUrl: '/certificates/AWS.png',
-            })}
+            }}
           />
           <CertificationCard 
             title="Fundamentals of Generative AI" 
@@ -52,13 +36,13 @@ const CertificationsSection = ({ theme, getThemeClasses }) => {
             theme={theme} 
             getThemeClasses={getThemeClasses}
             certificateUrl="/certificates/MicrosoftGenAi.png"
-            onViewCertificate={() => handleViewCertificate({
+            certificateData={{
               title: 'Fundamentals of Generative AI',
               provider: 'Microsoft',
               description: 'Core principles and applications of generative artificial intelligence',
               date: '2024',
               certificateUrl: '/certificates/MicrosoftGenAi.png',
-            })}
+            }}
           />
           <CertificationCard 
             title="Prompt Design in Vertex AI" 
@@ -68,13 +52,13 @@ const CertificationsSection = ({ theme, getThemeClasses }) => {
             theme={theme} 
             getThemeClasses={getThemeClasses}
             certificateUrl="/certificates/prompt-design-in-vertex-ai-skill-badge.png"
-            onViewCertificate={() => handleViewCertificate({
+            certificateData={{
               title: 'Prompt Design in Vertex AI',
               provider: 'Google Cloud Skills',
               description: 'Advanced prompt engineering techniques for Google Cloud\'s Vertex AI',
               date: '2024',
               certificateUrl: '/certificates/prompt-design-in-vertex-ai-skill-badge.png',
-            })}
+            }}
           />
           <CertificationCard 
             title="Develop GenAI Apps with Gemini and Streamlit" 
@@ -84,13 +68,13 @@ const CertificationsSection = ({ theme, getThemeClasses }) => {
             theme={theme} 
             getThemeClasses={getThemeClasses}
             certificateUrl="/certificates/develop-genai-apps-with-gemini-and-streamlit-skill-.png"
-            onViewCertificate={() => handleViewCertificate({
+            certificateData={{
               title: 'Develop GenAI Apps with Gemini and Streamlit',
               provider: 'Google Cloud Skills',
               description: 'Building generative AI applications using Gemini API and Streamlit framework',
               date: '2025',
               certificateUrl: '/certificates/develop-genai-apps-with-gemini-and-streamlit-skill-.png',
-            })}
+            }}
           />
           <CertificationCard 
             title="Communication Skills" 
@@ -100,13 +84,13 @@ const CertificationsSection = ({ theme, getThemeClasses }) => {
             theme={theme} 
             getThemeClasses={getThemeClasses}
             certificateUrl="/certificates/TCSion.png"
-            onViewCertificate={() => handleViewCertificate({
+            certificateData={{
               title: 'Communication Skills',
               provider: 'TCS iON',
               description: 'Professional communication and interpersonal skills development',
               date: '2025',
               certificateUrl: '/certificates/TCSion.png',
-            })}
+            }}
           />
           <CertificationCard 
             title="Other Certification" 
@@ -116,7 +100,7 @@ const CertificationsSection = ({ theme, getThemeClasses }) => {
             theme={theme} 
             getThemeClasses={getThemeClasses}
             certificateUrl="/certificates/python.png"
-            onViewCertificate={() => handleViewCertificate({
+            certificateData={{
               certificates: [
                 {
                   title: 'Python Programming',
@@ -132,13 +116,11 @@ const CertificationsSection = ({ theme, getThemeClasses }) => {
                   date: '2025',
                   certificateUrl: '/certificates/JavaSccript.png',
                 }
-              ],
-              current: 0
-            })}
+              ]
+            }}
             isOtherCertificate
           />
         </div>
-        <CertificateModal isOpen={modalOpen} onClose={handleCloseModal} certificate={modalData} />
       </div>
     </section>
   );
