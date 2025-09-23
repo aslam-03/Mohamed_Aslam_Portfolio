@@ -19,7 +19,7 @@ const HomeSection = ({ scrollToSection, theme, getThemeClasses }) => (
       </p>
       <div className="flex justify-center space-x-4 animate-fade-in-up delay-400">
         <a 
-          href="./Mohamed_Aslam_Resume.pdf" 
+          href="./public/Mohamed_Aslam_Resume.pdf" 
           download="Mohamed_Aslam_Resume.pdf" 
           className={`${getThemeClasses('buttonPrimary')} inline-flex items-center px-6 py-3 font-semibold rounded-lg transition-all duration-300 transform hover:scale-105`}
         >
