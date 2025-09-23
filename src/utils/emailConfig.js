@@ -6,11 +6,18 @@
 // 4. Get your Service ID, Template ID, and Public Key
 // 5. Replace the values below with your actual credentials
 
-export const EMAILJS_CONFIG = {
+export const emailConfig = {
   SERVICE_ID: import.meta.env.VITE_EMAILJS_SERVICE_ID,
   TEMPLATE_ID: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-  PUBLIC_KEY: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+  PUBLIC_KEY: import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 };
+
+// Debug logging to verify environment variables are loaded
+console.log('Environment Variables Check:', {
+  SERVICE_ID: emailConfig.SERVICE_ID || 'MISSING',
+  TEMPLATE_ID: emailConfig.TEMPLATE_ID || 'MISSING',
+  PUBLIC_KEY: emailConfig.PUBLIC_KEY ? 'LOADED' : 'MISSING'
+});
 
 // Example email template for EmailJS:
 // Subject: New Contact Form Message from {{from_name}}

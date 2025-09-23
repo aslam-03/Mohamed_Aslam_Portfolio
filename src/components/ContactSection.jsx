@@ -2,7 +2,7 @@ import { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { ContactInfoItem } from './Cards';
 import { Mail, Phone, Linkedin, Github, Send } from './Icons';
-import { EMAILJS_CONFIG } from '../utils/emailConfig';
+import { emailConfig } from '../utils/emailConfig';
 
 const ContactSection = ({ theme, getThemeClasses }) => {
   const [formData, setFormData] = useState({
@@ -26,7 +26,6 @@ const ContactSection = ({ theme, getThemeClasses }) => {
     setSubmitStatus('');
 
     try {
-      // EmailJS configuration
       const templateParams = {
         from_name: formData.name,
         from_email: formData.email,
@@ -34,12 +33,11 @@ const ContactSection = ({ theme, getThemeClasses }) => {
         to_email: 'aslamachu8558@gmail.com'
       };
 
-      // Send email using EmailJS
       await emailjs.send(
-        EMAILJS_CONFIG.SERVICE_ID,
-        EMAILJS_CONFIG.TEMPLATE_ID,
+        emailConfig.SERVICE_ID,
+        emailConfig.TEMPLATE_ID,
         templateParams,
-        EMAILJS_CONFIG.PUBLIC_KEY
+        emailConfig.PUBLIC_KEY
       );
 
       setSubmitStatus('success');
