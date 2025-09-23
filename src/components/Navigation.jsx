@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Home, GraduationCap, Briefcase, Code, Award, Mail, Sun, Moon } from './Icons';
 
 const NavItem = ({ icon: Icon, label, sectionId, activeSection, onClick, theme, getThemeClasses }) => {
@@ -18,6 +18,32 @@ const NavItem = ({ icon: Icon, label, sectionId, activeSection, onClick, theme, 
 
 const Navigation = ({ activeSection, scrollToSection, theme, toggleTheme, getThemeClasses }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navRef = useRef(null);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+
+    const handleOutsideClick = (e) => {
+      // If click is outside the navRef element, close mobile menu
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setMobileOpen(false);
+      }
+    };
+
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') setMobileOpen(false);
+    };
+
+    document.addEventListener('click', handleOutsideClick);
+    document.addEventListener('touchstart', handleOutsideClick);
+    document.addEventListener('keydown', handleEscape);
+
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+      document.removeEventListener('touchstart', handleOutsideClick);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [mobileOpen]);
 
   const handleNavClick = (sectionId) => {
     scrollToSection(sectionId);
@@ -25,7 +51,7 @@ const Navigation = ({ activeSection, scrollToSection, theme, toggleTheme, getThe
   };
 
   return (
-    <nav className={`${getThemeClasses('nav')} fixed top-0 left-0 right-0 z-50 shadow-lg transition-colors duration-300`}>
+  <nav ref={navRef} className={`${getThemeClasses('nav')} fixed top-0 left-0 right-0 z-50 shadow-lg transition-colors duration-300`}>
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <div className={`${getThemeClasses('navText')} text-2xl font-bold transition-colors duration-300 font-press-start`}>
           IM ASLAM

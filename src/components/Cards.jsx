@@ -120,7 +120,7 @@ const ProjectCard = ({ title, description, technologies, date, theme, getThemeCl
   };
   
   return (
-    <div className={`${getThemeClasses('cardBg')} text-left rounded-xl shadow-lg p-6 flex flex-col justify-between h-full transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl`}>
+    <div className={`${getThemeClasses('cardBg')} text-left rounded-xl shadow-lg p-8 flex flex-col justify-between h-full transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl`}>
       <div>
         <h3 className={`${getThemeClasses('cardTitle')} text-xl font-bold mb-3 font-press-start`}>
           {title}
@@ -200,7 +200,7 @@ const SkillCard = ({ skill, theme, getThemeClasses }) => {
 
   return (
     <div
-      className={`${getThemeClasses('cardBg')} rounded-lg shadow-md p-6 text-center transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-xl flex flex-col items-center justify-center`}
+      className={`${getThemeClasses('cardBg')} rounded-lg shadow-md p-6 text-center transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl flex flex-col items-center justify-center`}
       style={containerStyle}
     >
       <div className="mb-3 flex items-center justify-center" style={{ minHeight: 56 }}>
@@ -251,7 +251,6 @@ const CertificationCard = ({ title, provider, description, date, theme, getTheme
     
     // For multi-certificate cards
     if (isOtherCertificate && certificateData.certificates) {
-      const [currentCert, ...otherCerts] = certificateData.certificates;
       showModal(
         <CertificateModalContent 
           certificateData={certificateData}
@@ -271,25 +270,23 @@ const CertificationCard = ({ title, provider, description, date, theme, getTheme
   };
   
   return (
-    <div className={`${getThemeClasses('cardBg')} text-left rounded-xl shadow-lg p-6 flex flex-col justify-between h-full transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl`}>
-      <div>
-        <div className="mb-4">
-          <h3 className={`${getThemeClasses('cardTitle')} text-lg font-bold mb-2 font-press-start`}>
+    <div className={`${getThemeClasses('cardBg')} rounded-xl shadow-lg p-5 h-full transform hover:scale-105 hover:shadow-2xl transition-transform duration-500 ease-in-out will-change-transform text-left`}>
+      <div className="flex flex-col h-full">
+        <div className="flex-grow">
+          <h3 className={`${getThemeClasses('cardTitle')} text-xl font-bold mb-2 font-press-start line-clamp-1`}>
             {title}
           </h3>
-          <p className={`${getThemeClasses('cardDate')} text-base font-semibold mb-2 font-vt323`}>
+          <p className={`${getThemeClasses('cardText')} text-lg mb-1 font-vt323`}>
             {provider}
           </p>
-          <p className={`${getThemeClasses('cardDate')} text-sm mb-3 font-vt323`}>
+          <p className={`${getThemeClasses('cardDate')} text-sm mb-2 font-vt323`}>
             {date}
           </p>
+          <p className={`${getThemeClasses('cardText')} text-sm font-vt323 mb-3 line-clamp-2`}>
+            {description}
+          </p>
         </div>
-        <p className={`${getThemeClasses('cardText')} text-base leading-relaxed font-vt323 mb-4`}>
-          {description}
-        </p>
-      </div>
-      <div className="mt-auto">
-        <div className="flex justify-between items-center pt-4 border-t border-opacity-20">
+        <div className="flex justify-between items-center pt-3 border-t border-gray-200 dark:border-gray-700">
           <span className={`${getThemeClasses('techTag')} text-xs font-semibold px-3 py-1 rounded-full`}>
             Certified
           </span>
