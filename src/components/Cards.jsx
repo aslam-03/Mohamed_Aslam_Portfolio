@@ -122,20 +122,20 @@ const ProjectCard = ({ title, description, technologies, date, theme, getThemeCl
   return (
     <div className={`${getThemeClasses('cardBg')} text-left rounded-xl shadow-lg p-8 flex flex-col justify-between h-full transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl`}>
       <div>
-        <h3 className={`${getThemeClasses('cardTitle')} text-xl font-bold mb-3 font-press-start`}>
+        <h3 className={`${getThemeClasses('cardTitle')} text-xl font-bold mb-3 font-press-start wave-item`}>
           {title}
         </h3>
-        <p className={`${getThemeClasses('cardDate')} text-sm mb-2 font-vt323`}>
+        <p className={`${getThemeClasses('cardDate')} text-sm mb-2 font-vt323 wave-item`}>
           {date}
         </p>
-        <p className={`${getThemeClasses('cardText')} mb-4 font-vt323`}>
+        <p className={`${getThemeClasses('cardText')} mb-4 font-vt323 wave-item`}>
           {description}
         </p>
         <div className="flex flex-wrap gap-2 mb-4">
           {technologies.map((tech, index) => (
             <span 
               key={index} 
-              className={`${getThemeClasses('techTag')} text-xs font-semibold px-3 py-1 rounded-full`}
+              className={`${getThemeClasses('techTag')} text-xs font-semibold px-3 py-1 rounded-full wave-item`}
             >
               {tech}
             </span>
@@ -159,7 +159,7 @@ const ProjectCard = ({ title, description, technologies, date, theme, getThemeCl
         )}
         <button
           onClick={handleShowDetails}
-          className={`px-3 py-1 rounded font-bold text-xs transition-colors duration-200 shadow-neon-blue ml-auto
+          className={`px-3 py-1 rounded font-bold text-xs transition-colors duration-200 shadow-neon-blue ml-auto wave-item
             ${theme === 'dark' 
               ? 'bg-gray-900 text-white hover:bg-gray-800' 
               : 'bg-white text-gray-900 border border-gray-300 hover:bg-gray-100'}`}
@@ -174,18 +174,18 @@ const ProjectCard = ({ title, description, technologies, date, theme, getThemeCl
 
 const ExperienceCard = ({ title, company, duration, achievements, theme, getThemeClasses }) => (
   <div className={`${getThemeClasses('cardBg')} rounded-xl shadow-lg p-8 transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl`}>
-    <h3 className={`${getThemeClasses('cardTitle')} text-2xl font-bold mb-2 font-press-start`}>
+    <h3 className={`${getThemeClasses('cardTitle')} text-2xl font-bold mb-2 font-press-start wave-item`}>
       {title}
     </h3>
-    <p className={`${getThemeClasses('cardText')} text-xl mb-2 font-vt323`}>
+    <p className={`${getThemeClasses('cardText')} text-xl mb-2 font-vt323 wave-item`}>
       {company}
     </p>
-    <p className={`${getThemeClasses('cardDate')} text-sm mb-4 font-vt323`}>
+    <p className={`${getThemeClasses('cardDate')} text-sm mb-4 font-vt323 wave-item`}>
       {duration}
     </p>
     <ul className={`${getThemeClasses('cardText')} list-disc list-inside space-y-2 font-vt323`}>
       {achievements.map((achievement, index) => (
-        <li key={index}>{achievement}</li>
+        <li key={index} className="wave-item">{achievement}</li>
       ))}
     </ul>
   </div>
@@ -273,21 +273,21 @@ const CertificationCard = ({ title, provider, description, date, theme, getTheme
     <div className={`${getThemeClasses('cardBg')} rounded-xl shadow-lg p-5 h-full transform hover:scale-105 hover:shadow-2xl transition-transform duration-500 ease-in-out will-change-transform text-left`}>
       <div className="flex flex-col h-full">
         <div className="flex-grow">
-          <h3 className={`${getThemeClasses('cardTitle')} text-xl font-bold mb-2 font-press-start line-clamp-1`}>
+          <h3 className={`${getThemeClasses('cardTitle')} text-xl font-bold mb-2 font-press-start line-clamp-1 wave-item`}>
             {title}
           </h3>
-          <p className={`${getThemeClasses('cardText')} text-lg mb-1 font-vt323`}>
+          <p className={`${getThemeClasses('cardText')} text-lg mb-1 font-vt323 wave-item`}>
             {provider}
           </p>
-          <p className={`${getThemeClasses('cardDate')} text-sm mb-2 font-vt323`}>
+          <p className={`${getThemeClasses('cardDate')} text-sm mb-2 font-vt323 wave-item`}>
             {date}
           </p>
-          <p className={`${getThemeClasses('cardText')} text-sm font-vt323 mb-3 line-clamp-2`}>
+          <p className={`${getThemeClasses('cardText')} text-sm font-vt323 mb-3 line-clamp-2 wave-item`}>
             {description}
           </p>
         </div>
         <div className="flex justify-between items-center pt-3 border-t border-gray-200 dark:border-gray-700">
-          <span className={`${getThemeClasses('techTag')} text-xs font-semibold px-3 py-1 rounded-full`}>
+          <span className={`${getThemeClasses('techTag')} text-xs font-semibold px-3 py-1 rounded-full wave-item`}>
             Certified
           </span>
           {certificateUrl && (

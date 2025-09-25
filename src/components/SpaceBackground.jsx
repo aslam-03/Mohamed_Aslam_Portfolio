@@ -35,34 +35,55 @@ const SpaceBackground = () => {
       attributeFilter: ['class']
     });
 
-    // Set up scroll animations for all sections
+    // New: one-time reveal observer (0.8s duration, 150ms stagger)
     const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+      threshold: 0.12,
+      rootMargin: '0px 0px -10% 0px'
     };
 
-    const scrollObserver = new IntersectionObserver((entries) => {
+    const revealObserver = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
+        const el = entry.target;
         if (entry.isIntersecting) {
-          entry.target.classList.add('animate-in');
+          el.classList.add('revealed');
+          obs.unobserve(el);
         }
       });
     }, observerOptions);
 
-    // Observe all sections except hero for scroll animations
-    const allSections = document.querySelectorAll('section:not(#home)');
-    allSections.forEach(section => {
-      section.classList.add('fade-in-up');
-      scrollObserver.observe(section);
+    const sections = document.querySelectorAll('section:not(#home)');
+    sections.forEach(section => {
+      section.classList.add('reveal');
+
+      // mark direct children and grid children as reveal items
+      const items = section.querySelectorAll(':scope > *, :scope .grid > *');
+      items.forEach((child, idx) => {
+        child.classList.add('reveal-item');
+        child.style.setProperty('--r-delay', `${idx * 100}ms`); // 100ms stagger
+      });
+
+      // Additionally set staggered delays for any .wave-item inside this section
+      const waveItems = section.querySelectorAll('.wave-item');
+      waveItems.forEach((el, wIdx) => {
+        // offset slightly so wave starts after section-level reveal begins
+        el.style.setProperty('--wave-delay', `${wIdx * 100 + 40}ms`);
+      });
+
+      revealObserver.observe(section);
     });
 
     // Cleanup function
     return () => {
       const sections = document.querySelectorAll('section');
       sections.forEach(section => {
-        section.classList.remove('fade-in-up', 'animate-in');
-        scrollObserver.unobserve(section);
+        section.classList.remove('fade-in-up', 'animate-in', 'reveal', 'revealed');
+        const items = section.querySelectorAll('.reveal-item');
+        items.forEach(item => {
+          item.classList.remove('reveal-item');
+          item.style.removeProperty('--r-delay');
+        });
       });
+      revealObserver.disconnect();
       const wrapper = document.getElementById('content-wrapper');
       if (wrapper) wrapper.classList.remove('space-bg');
       themeObserver.disconnect();

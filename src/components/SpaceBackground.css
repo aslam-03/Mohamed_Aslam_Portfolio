@@ -194,16 +194,64 @@ section:not(#home).space-bg {
   }
 }
 
-/* Scroll Animation Styles */
-.fade-in-up {
+/* Scroll Animation / Reveal Styles */
+/* Section starts invisible and moves up into place when revealed. */
+.reveal {
+  --reveal-duration: 800ms; /* 0.8s */
+  --reveal-ease: cubic-bezier(0.25, 1, 0.5, 1);
   opacity: 0;
-  transform: translateY(60px);
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateY(40px);
+  transition: opacity var(--reveal-duration) var(--reveal-ease),
+              transform var(--reveal-duration) var(--reveal-ease);
 }
 
-.fade-in-up.animate-in {
+.reveal.revealed {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Children inside the section (text, cards, buttons) will fade in sequentially. */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity var(--reveal-duration) var(--reveal-ease) var(--r-delay, 0ms),
+              transform var(--reveal-duration) var(--reveal-ease) var(--r-delay, 0ms);
+}
+
+.reveal.revealed .reveal-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-item {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Wave-like horizontal fade for card text and similar elements */
+.wave-item {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.75s cubic-bezier(0.25, 1, 0.5, 1) var(--wave-delay, 0ms),
+              transform 0.75s cubic-bezier(0.25, 1, 0.5, 1) var(--wave-delay, 0ms);
+}
+
+.reveal.revealed .wave-item {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wave-item {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
 }
 
 /* Hero Section Animations */
