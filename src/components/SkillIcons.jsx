@@ -73,11 +73,13 @@ export const LogoImg = ({ src, alt = '', size = 48 }) => {
       const m = s.match(/https?:\/\/cdn\.simpleicons\.org\/(.+)\/(.+)\.svg$/i);
       if (m) {
         const name = m[1];
-        const color = m[2];
         // try jsDelivr raw github usercontent mirror for simple-icons (unofficial but often available)
         return `https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/${name}.svg`;
       }
-    } catch (e) {}
+    } catch {
+      // Fallback if URL parsing fails
+      return s;
+    }
     return s;
   };
 
@@ -139,6 +141,18 @@ export function getSkillIcon(skill, props = {}) {
   // if (s.includes('vs code') || s.includes('vscode')) return <LogoImg src="https://cdn.simpleicons.org/visualstudiocode/007ACC.svg" alt="VS Code" {...props} />;
   if (s.includes('dagshub')) return <LogoImg src={dagshubLogo} alt="DagsHub" {...props} />;
   if (s.includes('n8n')) return <LogoImg src="https://cdn.simpleicons.org/n8n/FF6A00.svg" alt="n8n" {...props} />;
+  // AI/ML Libraries
+  if (s.includes('tensorflow')) return <LogoImg src="https://cdn.simpleicons.org/tensorflow/FF6F00.svg" alt="TensorFlow" {...props} />;
+  if (s.includes('numpy')) return <LogoImg src="https://numpy.org/images/logo.svg" alt="NumPy" {...props} />;
+  if (s.includes('pandas')) return <LogoImg src="https://cdn.simpleicons.org/pandas/150458.svg" alt="Pandas" {...props} />;
+  if (s.includes('scikit') || s.includes('sklearn') || s === 'scikit learn') return <LogoImg src="https://cdn.simpleicons.org/scikitlearn/F7931E.svg" alt="scikit-learn" {...props} />;
+  // Backend & APIs
+  if (s.includes('fastapi')) return <LogoImg src="https://cdn.simpleicons.org/fastapi/009688.svg" alt="FastAPI" {...props} />;
+  if (s.includes('rest api') || s.includes('rest apis') || s === 'rest apis') return <LogoImg src="https://cdn.simpleicons.org/swagger/85EA2D.svg" alt="REST APIs" {...props} />;
+  if (s.includes('mysql')) return <LogoImg src="https://cdn.simpleicons.org/mysql/4479A1.svg" alt="MySQL" {...props} />;
+  // Tools
+  if (s.includes('vercel')) return <LogoImg src="https://cdn.simpleicons.org/vercel/000000.svg" alt="Vercel" {...props} />;
+  // Legacy entries (kept for backward compatibility)
   if (s.includes('machine learning') || s.includes('machine-learning') || s === 'machine' || s === 'ml') return <LogoImg src="https://cdn.simpleicons.org/microsoftazure/0089D6.svg" alt="ML" {...props} />;
   if (s.includes('gen ai') || s.includes('genai') || s.includes('gen-ai') || s === 'gen ai') return <LogoImg src="https://cdn.simpleicons.org/google/4285F4.svg" alt="AI" {...props} />;
   if (s.includes('frontend') || s.includes('front-end') || s.includes('frontend development') || s.includes('front end')) return <LogoImg src="https://cdn.simpleicons.org/webpack/8DD6F9.svg" alt="Frontend" {...props} />;

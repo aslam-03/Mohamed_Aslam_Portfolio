@@ -1,67 +1,56 @@
-import { SkillCard } from './Cards';
+import { SkillCategoryCard } from './Cards';
 
-const SkillsSection = ({ theme, getThemeClasses }) => (
-  <section 
-    id="skills" 
-    className={`bg-transparent py-10 px-2 sm:px-4 md:px-8 transition-colors duration-500`}
-  >
-    <div className="container mx-auto text-center">
-      <h2 className={`${getThemeClasses('heading')} text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-10 md:mb-12 border-b-4 pb-2 sm:pb-4 inline-block font-press-start`}>
-        Skills
-      </h2>
-      <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8 md:space-y-10">
-        {/* Programming */}
-        <div>
-          <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 font-vt323">Programming</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
-            <div className="flex justify-center"><SkillCard skill="Python" theme={theme} getThemeClasses={getThemeClasses} /></div>
-            <div className="flex justify-center"><SkillCard skill="JavaScript" theme={theme} getThemeClasses={getThemeClasses} /></div>
-            <div className="flex justify-center"><SkillCard skill="HTML" theme={theme} getThemeClasses={getThemeClasses} /></div>
-            <div className="flex justify-center"><SkillCard skill="CSS" theme={theme} getThemeClasses={getThemeClasses} /></div>
-          </div>
-        </div>
-        {/* Machine Learning & AI */}
-        <div>
-          <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 font-vt323">Technical Skills</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
-            <div className="flex justify-center"><SkillCard skill="Machine Learning" theme={theme} getThemeClasses={getThemeClasses} /></div>
-            <div className="flex justify-center"><SkillCard skill="GenAI" theme={theme} getThemeClasses={getThemeClasses} /></div>
-            <div className="flex justify-center"><SkillCard skill="Frontend development" theme={theme} getThemeClasses={getThemeClasses} /></div>
-          </div>
-        </div>
-        {/* Tools */}
-        <div>
-          <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 font-vt323">Tools</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
-            <div className="flex justify-center"><SkillCard skill="Git" theme={theme} getThemeClasses={getThemeClasses} /></div>
-            <div className="flex justify-center"><SkillCard skill="GitHub" theme={theme} getThemeClasses={getThemeClasses} /></div>
-            <div className="flex justify-center"><SkillCard skill="DagsHub" theme={theme} getThemeClasses={getThemeClasses} /></div>
-            <div className="flex justify-center"><SkillCard skill="n8n" theme={theme} getThemeClasses={getThemeClasses} /></div>
-            <div className="flex justify-center"><SkillCard skill="VSCode" theme={theme} getThemeClasses={getThemeClasses} /></div>
-            <div className="flex justify-center"><SkillCard skill="Docker" theme={theme} getThemeClasses={getThemeClasses} /></div>
-          </div>
-        </div>
-        {/* Frameworks */}
-        <div>
-          <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 font-vt323">Frameworks</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
-            <div className="flex justify-center"><SkillCard skill="React" theme={theme} getThemeClasses={getThemeClasses} /></div>
-            <div className="flex justify-center"><SkillCard skill="Streamlit" theme={theme} getThemeClasses={getThemeClasses} /></div>
-            <div className="flex justify-center"><SkillCard skill="Flask" theme={theme} getThemeClasses={getThemeClasses} /></div>
-          </div>
-        </div>
-        {/* Soft Skills */}
-        <div>
-          <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 font-vt323">Soft Skills</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
-            <div className="flex justify-center"><SkillCard skill="Problem Solving" theme={theme} getThemeClasses={getThemeClasses} /></div>
-            <div className="flex justify-center"><SkillCard skill="Time Management" theme={theme} getThemeClasses={getThemeClasses} /></div>
-            <div className="flex justify-center"><SkillCard skill="Team Collaboration" theme={theme} getThemeClasses={getThemeClasses} /></div>
-          </div>
+const SkillsSection = ({ theme, getThemeClasses }) => {
+  // Skill categories data with properly segregated skills
+  const skillCategories = [
+    {
+      title: "Frontend",
+      tagline: "Crafting pixel-perfect, interactive web experiences that users love",
+      skills: ["React", "JavaScript", "HTML", "CSS"]
+    },
+    {
+      title: "AI/ML",
+      tagline: "Transforming data into intelligent solutions with cutting-edge ML algorithms",
+      skills: ["Python", "TensorFlow", "Numpy", "Pandas", "scikit learn"]
+    },
+    {
+      title: "Backend",
+      tagline: "Building robust, scalable APIs that power modern applications",
+      skills: ["FastAPI", "REST APIs", "Flask", "MySQL"]
+    },
+    {
+      title: "Tools",
+      tagline: "Leveraging industry-standard tools for seamless development workflows",
+      skills: ["Git", "GitHub", "Vercel", "n8n", "VSCode", "Docker"]
+    }
+  ];
+
+  return (
+    <section 
+      id="skills" 
+      className={`bg-transparent py-10 px-2 sm:px-4 md:px-8 transition-colors duration-500`}
+    >
+      <div className="container mx-auto text-center">
+        <h2 className={`${getThemeClasses('heading')} text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-10 md:mb-12 border-b-4 pb-2 sm:pb-4 inline-block font-press-start`}>
+          Skills
+        </h2>
+        
+        {/* Skill category cards - horizontal layout like projects */}
+        <div className="space-y-8 sm:space-y-10 md:space-y-12 max-w-4xl mx-auto text-left">
+          {skillCategories.map((category, index) => (
+            <SkillCategoryCard
+              key={index}
+              title={category.title}
+              tagline={category.tagline}
+              skills={category.skills}
+              theme={theme}
+              getThemeClasses={getThemeClasses}
+            />
+          ))}
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default SkillsSection;

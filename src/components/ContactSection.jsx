@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
-import { ContactInfoItem } from './Cards';
-import { Mail, Phone, Linkedin, Github, Send } from './Icons';
+import { Mail, Linkedin, Github, Send } from './Icons';
 import { emailConfig } from '../utils/emailConfig';
 
-const ContactSection = ({ theme, getThemeClasses }) => {
+const ContactSection = ({ getThemeClasses }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -30,7 +29,7 @@ const ContactSection = ({ theme, getThemeClasses }) => {
         from_name: formData.name,
         from_email: formData.email,
         message: formData.message,
-        to_email: 'aslamachu8558@gmail.com'
+        to_email: 'mohamed.aslam.i.2004@gmail.com'
       };
 
       await emailjs.send(
@@ -63,40 +62,69 @@ const ContactSection = ({ theme, getThemeClasses }) => {
           <p className={`${getThemeClasses('paragraph')} text-lg text-center mb-8 font-vt323`}>
             Feel free to reach out for collaborations, job opportunities, or just to say hello!
           </p>
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12 text-left">
-          <ContactInfoItem 
-            icon={Mail} 
-            label="Email" 
-            value="aslamachu8558@gmail.com" 
-            link="mailto:aslamachu8558@gmail.com" 
-            theme={theme} 
-            getThemeClasses={getThemeClasses} 
-          />
-          <ContactInfoItem 
-            icon={Phone} 
-            label="Phone" 
-            value="+91 7092841437" 
-            link="tel:+917092841437" 
-            theme={theme} 
-            getThemeClasses={getThemeClasses} 
-          />
-          <ContactInfoItem 
-            icon={Linkedin} 
-            label="LinkedIn" 
-            value="linkedin.com/in/mohamed-aslam-" 
-            link="https://in.linkedin.com/in/mohamed-aslam-" 
-            theme={theme} 
-            getThemeClasses={getThemeClasses} 
-          />
-          <ContactInfoItem 
-            icon={Github} 
-            label="GitHub" 
-            value="github.com/aslam-03" 
-            link="https://github.com/aslam-03" 
-            theme={theme} 
-            getThemeClasses={getThemeClasses} 
-          />
-        </div>
+          {/* Contact Links - Three column layout for better visual balance */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
+            <div className={`${getThemeClasses('cardBg')} group relative overflow-hidden rounded-lg shadow-md p-4 transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg text-center border-2 ${getThemeClasses('techTag')}`}>
+              <div className="flex flex-col items-center space-y-3">
+                <div className={`p-3 rounded-full ${getThemeClasses('buttonPrimary')} group-hover:scale-110 transition-transform duration-300`}>
+                  <Mail size={24} className="text-white" />
+                </div>
+                <div>
+                  <p className={`${getThemeClasses('cardTitle')} text-base font-bold font-press-start mb-1`}>
+                    Email
+                  </p>
+                  <a 
+                    href="mailto:mohamed.aslam.i.2004@gmail.com"
+                    className={`${getThemeClasses('cardText')} text-sm font-vt323 hover:underline break-all`}
+                  >
+                    mohamed.aslam.i.2004@gmail.com
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className={`${getThemeClasses('cardBg')} group relative overflow-hidden rounded-lg shadow-md p-4 transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg text-center border-2 ${getThemeClasses('techTag')}`}>
+              <div className="flex flex-col items-center space-y-3">
+                <div className={`p-3 rounded-full ${getThemeClasses('buttonPrimary')} group-hover:scale-110 transition-transform duration-300`}>
+                  <Linkedin size={24} className="text-white" />
+                </div>
+                <div>
+                  <p className={`${getThemeClasses('cardTitle')} text-base font-bold font-press-start mb-1`}>
+                    LinkedIn
+                  </p>
+                  <a 
+                    href="https://in.linkedin.com/in/mohamed-aslam-"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${getThemeClasses('cardText')} text-sm font-vt323 hover:underline`}
+                  >
+                    linkedin.com/in/mohamed-aslam-
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className={`${getThemeClasses('cardBg')} group relative overflow-hidden rounded-lg shadow-md p-4 transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg text-center border-2 ${getThemeClasses('techTag')}`}>
+              <div className="flex flex-col items-center space-y-3">
+                <div className={`p-3 rounded-full ${getThemeClasses('buttonPrimary')} group-hover:scale-110 transition-transform duration-300`}>
+                  <Github size={24} className="text-white" />
+                </div>
+                <div>
+                  <p className={`${getThemeClasses('cardTitle')} text-base font-bold font-press-start mb-1`}>
+                    GitHub
+                  </p>
+                  <a 
+                    href="https://github.com/aslam-03"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${getThemeClasses('cardText')} text-sm font-vt323 hover:underline`}
+                  >
+                    github.com/aslam-03
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         <form className="space-y-6 text-left" onSubmit={handleSubmit}>
           {submitStatus === 'success' && (
             <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">

@@ -3,7 +3,7 @@ import { useModal } from '../utils/ModalContext';
 import getSkillIcon from './SkillIcons';
 
 // Certificate Modal Content Component
-const CertificateModalContent = ({ certificateData, theme }) => {
+const CertificateModalContent = ({ certificateData }) => {
   // Support navigation for 'Other Certification' card
   const isOther = Array.isArray(certificateData.certificates);
   const [current, setCurrent] = useState(isOther ? 0 : 0);
@@ -72,7 +72,7 @@ const CertificateModalContent = ({ certificateData, theme }) => {
   );
 };
 
-const ProjectCard = ({ title, description, technologies, date, theme, getThemeClasses, githubUrl, about, aboutDetails }) => {
+const ProjectCard = ({ title, description, technologies, date, theme, getThemeClasses, githubUrl, aboutDetails }) => {
   const { showModal } = useModal();
   
   const handleShowDetails = () => {
@@ -125,17 +125,17 @@ const ProjectCard = ({ title, description, technologies, date, theme, getThemeCl
         <h3 className={`${getThemeClasses('cardTitle')} text-xl font-bold mb-3 font-press-start wave-item`}>
           {title}
         </h3>
-        <p className={`${getThemeClasses('cardDate')} text-sm mb-2 font-vt323 wave-item`}>
+        <p className={`${getThemeClasses('cardDate')} text-base mb-2 font-vt323 wave-item`}>
           {date}
         </p>
-        <p className={`${getThemeClasses('cardText')} mb-4 font-vt323 wave-item`}>
+        <p className={`${getThemeClasses('cardText')} mb-4 font-vt323 wave-item text-base`}>
           {description}
         </p>
         <div className="flex flex-wrap gap-2 mb-4">
           {technologies.map((tech, index) => (
             <span 
               key={index} 
-              className={`${getThemeClasses('techTag')} text-xs font-semibold px-3 py-1 rounded-full wave-item`}
+              className={`${getThemeClasses('techTag')} text-sm font-semibold px-3 py-1 rounded-full wave-item`}
             >
               {tech}
             </span>
@@ -172,7 +172,7 @@ const ProjectCard = ({ title, description, technologies, date, theme, getThemeCl
   );
 };
 
-const ExperienceCard = ({ title, company, duration, achievements, theme, getThemeClasses }) => (
+const ExperienceCard = ({ title, company, duration, achievements, getThemeClasses }) => (
   <div className={`${getThemeClasses('cardBg')} rounded-xl shadow-lg p-8 transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl`}>
     <h3 className={`${getThemeClasses('cardTitle')} text-2xl font-bold mb-2 font-press-start wave-item`}>
       {title}
@@ -180,10 +180,10 @@ const ExperienceCard = ({ title, company, duration, achievements, theme, getThem
     <p className={`${getThemeClasses('cardText')} text-xl mb-2 font-vt323 wave-item`}>
       {company}
     </p>
-    <p className={`${getThemeClasses('cardDate')} text-sm mb-4 font-vt323 wave-item`}>
+    <p className={`${getThemeClasses('cardDate')} text-base mb-4 font-vt323 wave-item`}>
       {duration}
     </p>
-    <ul className={`${getThemeClasses('cardText')} list-disc list-inside space-y-2 font-vt323`}>
+    <ul className={`${getThemeClasses('cardText')} list-disc list-inside space-y-2 font-vt323 text-base`}>
       {achievements.map((achievement, index) => (
         <li key={index} className="wave-item">{achievement}</li>
       ))}
@@ -191,7 +191,7 @@ const ExperienceCard = ({ title, company, duration, achievements, theme, getThem
   </div>
 );
 
-const SkillCard = ({ skill, theme, getThemeClasses }) => {
+const SkillCard = ({ skill, getThemeClasses }) => {
   const words = skill.trim().split(/\s+/);
   const singleWord = words.length === 1;
   const containerStyle = { fontSize: '1rem', padding: '1.25rem', minWidth: 200, width: 'clamp(220px, 24vw, 360px)' };
@@ -224,24 +224,27 @@ const SkillCard = ({ skill, theme, getThemeClasses }) => {
   );
 };
 
-const ContactInfoItem = ({ icon: Icon, label, value, link, theme, getThemeClasses }) => (
-  <div className={`${getThemeClasses('cardBg')} flex items-center space-x-4 p-4 rounded-lg shadow-inner`}>
-    <Icon size={24} className={`${getThemeClasses('cardTitle')} flex-shrink-0`} />
-    <div>
-      <p className={`${getThemeClasses('cardDate')} text-sm font-vt323`}>
-        {label}
-      </p>
-      <a 
-        href={link} 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className={`${getThemeClasses('cardText')} text-md font-semibold hover:underline font-vt323`}
-      >
-        {value}
-      </a>
+const ContactInfoItem = ({ icon, label, value, link, getThemeClasses }) => {
+  const IconComponent = icon;
+  return (
+    <div className={`${getThemeClasses('cardBg')} flex items-center space-x-4 p-4 rounded-lg shadow-inner`}>
+      <IconComponent size={24} className={`${getThemeClasses('cardTitle')} flex-shrink-0`} />
+      <div>
+        <p className={`${getThemeClasses('cardDate')} text-sm font-vt323`}>
+          {label}
+        </p>
+        <a 
+          href={link} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className={`${getThemeClasses('cardText')} text-md font-semibold hover:underline font-vt323`}
+        >
+          {value}
+        </a>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const CertificationCard = ({ title, provider, description, date, theme, getThemeClasses, certificateUrl, certificateData, isOtherCertificate }) => {
   const { showModal } = useModal();
@@ -279,10 +282,10 @@ const CertificationCard = ({ title, provider, description, date, theme, getTheme
           <p className={`${getThemeClasses('cardText')} text-lg mb-1 font-vt323 wave-item`}>
             {provider}
           </p>
-          <p className={`${getThemeClasses('cardDate')} text-sm mb-2 font-vt323 wave-item`}>
+          <p className={`${getThemeClasses('cardDate')} text-base mb-2 font-vt323 wave-item`}>
             {date}
           </p>
-          <p className={`${getThemeClasses('cardText')} text-sm font-vt323 mb-3 line-clamp-2 wave-item`}>
+          <p className={`${getThemeClasses('cardText')} text-base font-vt323 mb-3 line-clamp-2 wave-item`}>
             {description}
           </p>
         </div>
@@ -308,4 +311,36 @@ const CertificationCard = ({ title, provider, description, date, theme, getTheme
   );
 };
 
-export { ProjectCard, ExperienceCard, SkillCard, ContactInfoItem, CertificationCard };
+// Skill Category Card Component
+const SkillCategoryCard = ({ title, skills, tagline, getThemeClasses }) => (
+  <div className={`${getThemeClasses('cardBg')} rounded-xl shadow-lg p-8 transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl text-left`}>
+    <div className="flex flex-col h-full">
+      <div className="mb-6">
+        <h3 className={`${getThemeClasses('cardTitle')} text-2xl font-bold font-press-start mb-2 wave-item`}>
+          {title}
+        </h3>
+        <div className={`h-1 w-full rounded-full ${getThemeClasses('techTag')} mb-4`}></div>
+        <p className={`${getThemeClasses('cardText')} text-base md:text-lg font-vt323 wave-item leading-relaxed`}>
+          {tagline}
+        </p>
+      </div>
+      
+      <div className="flex-grow">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          {skills.map((skill, index) => (
+            <div key={index} className="flex flex-col items-center group">
+              <div className={`${getThemeClasses('cardBg')} border-2 ${getThemeClasses('techTag')} p-3 rounded-lg mb-2 group-hover:scale-110 transition-transform duration-300`}>
+                {getSkillIcon(skill, 28)}
+              </div>
+              <span className={`${getThemeClasses('cardText')} text-sm font-vt323 text-center leading-tight wave-item`}>
+                {skill}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+export { ProjectCard, ExperienceCard, SkillCard, ContactInfoItem, CertificationCard, SkillCategoryCard };

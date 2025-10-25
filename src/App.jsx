@@ -13,6 +13,8 @@ import SpaceBackground from './components/SpaceBackground';
 import { getThemeClasses } from './utils/theme';
 import { ModalProvider } from './utils/ModalContext';
 
+const allSections = ['home', 'experience', 'skills', 'academia', 'certifications', 'contact'];
+
 function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
@@ -33,8 +35,6 @@ function App() {
   const toggleTheme = () => setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
 
   const themeClasses = (elementKey) => getThemeClasses(theme, elementKey);
-
-  const allSections = ['home', 'academia', 'experience', 'skills', 'certifications', 'contact'];
   
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -76,17 +76,17 @@ function App() {
         />
         {/* Unified background wrapper for all sections except hero */}
         <div id="content-wrapper" className="unified-bg relative min-h-screen">
-          <AcademiaSection 
-            theme={theme}
-            getThemeClasses={themeClasses}
-          />
-          
           <ExperienceSection 
             theme={theme}
             getThemeClasses={themeClasses}
           />
           
           <SkillsSection 
+            theme={theme}
+            getThemeClasses={themeClasses}
+          />
+          
+          <AcademiaSection 
             theme={theme}
             getThemeClasses={themeClasses}
           />

@@ -2,14 +2,15 @@
 import { useState, useRef, useEffect } from 'react';
 import { Home, GraduationCap, Briefcase, Code, Award, Mail, Sun, Moon } from './Icons';
 
-const NavItem = ({ icon: Icon, label, sectionId, activeSection, onClick, theme, getThemeClasses }) => {
+const NavItem = ({ icon, label, sectionId, activeSection, onClick, getThemeClasses }) => {
   const isActive = activeSection === sectionId;
+  const IconComponent = icon;
   return (
     <button 
       onClick={() => onClick(sectionId)} 
       className={`${isActive ? getThemeClasses('navItemActive') : getThemeClasses('navItem')} flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-300`}
     >
-      <Icon size={18} />
+      <IconComponent size={18} />
       <span className="font-vt323">{label}</span>
     </button>
   );
@@ -64,16 +65,6 @@ const Navigation = ({ activeSection, scrollToSection, theme, toggleTheme, getThe
             sectionId="home" 
             activeSection={activeSection} 
             onClick={handleNavClick} 
-            theme={theme} 
-            getThemeClasses={getThemeClasses} 
-          />
-          <NavItem 
-            icon={GraduationCap} 
-            label="Projects" 
-            sectionId="academia" 
-            activeSection={activeSection} 
-            onClick={handleNavClick} 
-            theme={theme} 
             getThemeClasses={getThemeClasses} 
           />
           <NavItem 
@@ -82,7 +73,6 @@ const Navigation = ({ activeSection, scrollToSection, theme, toggleTheme, getThe
             sectionId="experience" 
             activeSection={activeSection} 
             onClick={handleNavClick} 
-            theme={theme} 
             getThemeClasses={getThemeClasses} 
           />
           <NavItem 
@@ -91,7 +81,14 @@ const Navigation = ({ activeSection, scrollToSection, theme, toggleTheme, getThe
             sectionId="skills" 
             activeSection={activeSection} 
             onClick={handleNavClick} 
-            theme={theme} 
+            getThemeClasses={getThemeClasses} 
+          />
+          <NavItem 
+            icon={GraduationCap} 
+            label="Projects" 
+            sectionId="academia" 
+            activeSection={activeSection} 
+            onClick={handleNavClick} 
             getThemeClasses={getThemeClasses} 
           />
           <NavItem 
@@ -100,7 +97,6 @@ const Navigation = ({ activeSection, scrollToSection, theme, toggleTheme, getThe
             sectionId="certifications" 
             activeSection={activeSection} 
             onClick={handleNavClick} 
-            theme={theme} 
             getThemeClasses={getThemeClasses} 
           />
           <NavItem 
@@ -109,7 +105,6 @@ const Navigation = ({ activeSection, scrollToSection, theme, toggleTheme, getThe
             sectionId="contact" 
             activeSection={activeSection} 
             onClick={handleNavClick} 
-            theme={theme} 
             getThemeClasses={getThemeClasses} 
           />
           <button 
@@ -146,9 +141,9 @@ const Navigation = ({ activeSection, scrollToSection, theme, toggleTheme, getThe
         >
           {[
             { icon: Home, label: 'Home', sectionId: 'home' },
-            { icon: GraduationCap, label: 'Projects', sectionId: 'academia' },
             { icon: Briefcase, label: 'Experience', sectionId: 'experience' },
             { icon: Code, label: 'Skills', sectionId: 'skills' },
+            { icon: GraduationCap, label: 'Projects', sectionId: 'academia' },
             { icon: Award, label: 'Certifications', sectionId: 'certifications' },
             { icon: Mail, label: 'Contact', sectionId: 'contact' },
           ].map((item, idx) => (
@@ -165,7 +160,6 @@ const Navigation = ({ activeSection, scrollToSection, theme, toggleTheme, getThe
                 sectionId={item.sectionId}
                 activeSection={activeSection}
                 onClick={handleNavClick}
-                theme={theme}
                 getThemeClasses={getThemeClasses}
               />
             </div>

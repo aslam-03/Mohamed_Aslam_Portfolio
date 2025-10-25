@@ -151,9 +151,9 @@ Portfolio/
 ## 📞 Contact
 
 - **Email**: [aslamachu8558@gmail.com](mailto:aslamachu8558@gmail.com)
-- **LinkedIn**: [LinkedIn Profile](www.linkedin.com/in/mohamed-aslam-i)
+- **LinkedIn**: [LinkedIn Profile](https://www.linkedin.com/in/mohamed-aslam-i)
 - **GitHub**: [aslam-03](https://github.com/aslam-03)
-- **Portfolio**: [Live Demo](https://your-portfolio-url.com)
+- **Portfolio**: [Live Demo](https://mohamedaslam.vercel.app)
 
 
 Made with ❤️ by Mohamed Aslam
