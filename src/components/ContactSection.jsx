@@ -93,12 +93,12 @@ const ContactSection = ({ getThemeClasses }) => {
                     LinkedIn
                   </p>
                   <a 
-                    href="https://in.linkedin.com/in/mohamed-aslam-"
+                    href="https://in.linkedin.com/in/mohamed-aslam-i"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`${getThemeClasses('cardText')} text-sm font-vt323 hover:underline`}
                   >
-                    linkedin.com/in/mohamed-aslam-
+                    linkedin.com/in/mohamed-aslam-i
                   </a>
                 </div>
               </div>
