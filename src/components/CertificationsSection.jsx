@@ -4,9 +4,9 @@ import React from 'react';
 const CertificationsSection = ({ theme, getThemeClasses }) => {
   return (
     <section 
-      id="certifications" 
-      className={`bg-transparent py-10 px-2 sm:px-4 md:px-8 transition-colors duration-500`}
-    >
+        id="certifications" 
+        className={`bg-transparent py-10 px-2 sm:px-4 md:px-8 transition-colors duration-500 scroll-mt-24 md:scroll-mt-28`}
+      >
       <div className="container mx-auto text-center">
         <h2 className={`${getThemeClasses('heading')} text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-10 md:mb-12 border-b-4 pb-2 sm:pb-4 inline-block font-press-start`}>
           Certifications

@@ -1,11 +1,11 @@
 import { Suspense } from 'react';
 import HeroAnimation from './HeroAnimation';
-import { Download, Mail } from './Icons';
+import { Eye, Mail } from './Icons';
 
 const HomeSection = ({ scrollToSection, theme, getThemeClasses }) => (
   <section 
     id="home" 
-    className={`${getThemeClasses('sectionBgPrimary')} h-screen flex items-center justify-center text-center p-8 relative overflow-hidden transition-colors duration-300`}
+    className={`${getThemeClasses('sectionBgPrimary')} h-screen flex items-center justify-center text-center p-8 relative overflow-hidden transition-colors duration-300 scroll-mt-24`}
   >
     <Suspense fallback={<div>Loading Animation...</div>}>
       <HeroAnimation />
@@ -20,10 +20,11 @@ const HomeSection = ({ scrollToSection, theme, getThemeClasses }) => (
       <div className="flex justify-center space-x-4 animate-fade-in-up delay-400">
         <a 
           href="./Mohamed_Aslam_Resume.pdf" 
-          download="Mohamed_Aslam_Resume.pdf" 
+          target="_blank"
+          rel="noopener noreferrer"
           className={`${getThemeClasses('buttonPrimary')} inline-flex items-center px-6 py-3 font-semibold rounded-lg transition-all duration-300 transform hover:scale-105`}
         >
-          <Download className="mr-2" size={20} /> Download Resume
+          <Eye className="mr-2" size={20} /> View Resume
         </a>
         <button 
           onClick={() => scrollToSection('contact')} 

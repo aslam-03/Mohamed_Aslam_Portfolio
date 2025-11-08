@@ -1,12 +1,13 @@
 
 import { useState, useRef, useEffect } from 'react';
-import { Home, GraduationCap, Briefcase, Code, Award, Mail, Sun, Moon } from './Icons';
+import { Home, User, GraduationCap, Briefcase, Code, Award, Mail, Sun, Moon } from './Icons';
 
 const NavItem = ({ icon, label, sectionId, activeSection, onClick, getThemeClasses }) => {
   const isActive = activeSection === sectionId;
   const IconComponent = icon;
   return (
     <button 
+      type="button"
       onClick={() => onClick(sectionId)} 
       className={`${isActive ? getThemeClasses('navItemActive') : getThemeClasses('navItem')} flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-300`}
     >
@@ -47,7 +48,9 @@ const Navigation = ({ activeSection, scrollToSection, theme, toggleTheme, getThe
   }, [mobileOpen]);
 
   const handleNavClick = (sectionId) => {
-    scrollToSection(sectionId);
+    if (!sectionId || typeof sectionId !== 'string') return;
+    const id = sectionId.trim();
+    scrollToSection(id);
     setMobileOpen(false);
   };
 
@@ -58,55 +61,27 @@ const Navigation = ({ activeSection, scrollToSection, theme, toggleTheme, getThe
           IM ASLAM
         </div>
         {/* Desktop Nav */}
-        <div className="hidden md:flex space-x-4 items-center">
-          <NavItem 
-            icon={Home} 
-            label="Home" 
-            sectionId="home" 
-            activeSection={activeSection} 
-            onClick={handleNavClick} 
-            getThemeClasses={getThemeClasses} 
-          />
-          <NavItem 
-            icon={Briefcase} 
-            label="Experience" 
-            sectionId="experience" 
-            activeSection={activeSection} 
-            onClick={handleNavClick} 
-            getThemeClasses={getThemeClasses} 
-          />
-          <NavItem 
-            icon={Code} 
-            label="Skills" 
-            sectionId="skills" 
-            activeSection={activeSection} 
-            onClick={handleNavClick} 
-            getThemeClasses={getThemeClasses} 
-          />
-          <NavItem 
-            icon={GraduationCap} 
-            label="Projects" 
-            sectionId="academia" 
-            activeSection={activeSection} 
-            onClick={handleNavClick} 
-            getThemeClasses={getThemeClasses} 
-          />
-          <NavItem 
-            icon={Award} 
-            label="Certifications" 
-            sectionId="certifications" 
-            activeSection={activeSection} 
-            onClick={handleNavClick} 
-            getThemeClasses={getThemeClasses} 
-          />
-          <NavItem 
-            icon={Mail} 
-            label="Contact" 
-            sectionId="contact" 
-            activeSection={activeSection} 
-            onClick={handleNavClick} 
-            getThemeClasses={getThemeClasses} 
-          />
+        <div className="hidden lg:flex space-x-4 items-center">
+          {/* Centralized nav items to ensure desktop/mobile parity */}
+          {[
+            { icon: Home, label: 'Home', sectionId: 'home' },
+            { icon: User, label: 'About', sectionId: 'about' },
+            { icon: Briefcase, label: 'Experience', sectionId: 'experience' },
+            { icon: Code, label: 'Skills', sectionId: 'skills' },
+            { icon: GraduationCap, label: 'Projects', sectionId: 'academia' },
+            { icon: Award, label: 'Certifications', sectionId: 'certifications' },
+            { icon: Mail, label: 'Contact', sectionId: 'contact' },
+          ].map(item => (
+            <NavItem
+              key={item.sectionId}
+              icon={item.icon}
+              label={item.label}
+              sectionId={item.sectionId}
+              activeSection={activeSection}
+              onClick={handleNavClick}
+              getThemeClasses={getThemeClasses}
+            />
+          ))}
           <button 
             onClick={toggleTheme} 
             className={`${getThemeClasses('navItem')} flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-300`} 
@@ -117,7 +92,7 @@ const Navigation = ({ activeSection, scrollToSection, theme, toggleTheme, getThe
         </div>
         {/* Mobile Burger Button */}
         <button
-          className={`md:hidden flex items-center px-3 py-2 rounded-lg focus:outline-none transition-all duration-300
+          className={`lg:hidden flex items-center px-3 py-2 rounded-lg focus:outline-none transition-all duration-300
             ${mobileOpen
               ? 'bg-white/80 dark:bg-gray-900/80 shadow-lg'
               : 'bg-white/30 dark:bg-gray-900/30 hover:bg-white/50 dark:hover:bg-gray-900/50'}
@@ -132,7 +107,7 @@ const Navigation = ({ activeSection, scrollToSection, theme, toggleTheme, getThe
       </div>
       {/* Mobile Nav Items */}
       <div
-        className={`md:hidden absolute right-4 z-40 transition-all duration-500 ${mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+        className={`lg:hidden absolute right-4 z-40 transition-all duration-500 ${mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
         style={{ top: '60px', width: 'fit-content', minWidth: '220px' }}
         aria-hidden={!mobileOpen}
       >
@@ -141,6 +116,7 @@ const Navigation = ({ activeSection, scrollToSection, theme, toggleTheme, getThe
         >
           {[
             { icon: Home, label: 'Home', sectionId: 'home' },
+            { icon: User, label: 'About', sectionId: 'about' },
             { icon: Briefcase, label: 'Experience', sectionId: 'experience' },
             { icon: Code, label: 'Skills', sectionId: 'skills' },
             { icon: GraduationCap, label: 'Projects', sectionId: 'academia' },
@@ -166,7 +142,7 @@ const Navigation = ({ activeSection, scrollToSection, theme, toggleTheme, getThe
           ))}
           <div
             style={{
-              animation: mobileOpen ? `fade-in-stagger 0.4s ${0.08 * 6 + 0.08}s both` : 'none',
+              animation: mobileOpen ? `fade-in-stagger 0.4s ${0.08 * 7 + 0.08}s both` : 'none',
               width: '100%'
             }}
           >
