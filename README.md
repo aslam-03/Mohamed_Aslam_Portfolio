@@ -1,4 +1,3 @@
-#
  # 🚀 Mohamed Aslam I – Portfolio
 
 Interactive developer portfolio featuring a starfield hero mini‑game, cinematic theme transitions, scroll‑spy navigation, and a working EmailJS contact form.
