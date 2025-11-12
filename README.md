@@ -1,11 +1,11 @@
- # 🚀 Mohamed Aslam I – Portfolio
+ #  Mohamed Aslam I – Portfolio
 
 Interactive developer portfolio featuring a starfield hero mini‑game, cinematic theme transitions, scroll‑spy navigation, and a working EmailJS contact form.
 
 — Tech: React 19, Vite 7, Tailwind CSS , Framer Motion, EmailJS
 
 
-## ✨ Features
+##  Features
 
 - Interactive hero section (Canvas mini‑game)
   - Animated spaceship with auto‑aim, comets, asteroids, alien ship, explosions, and live score.
@@ -23,7 +23,7 @@ Interactive developer portfolio featuring a starfield hero mini‑game, cinemati
   - Works without a backend; credentials via environment variables.
 
 
-## 🧭 Sections
+##  Sections
 
 - Home (hero + CTAs)
 - About (image + bio)
@@ -34,7 +34,7 @@ Interactive developer portfolio featuring a starfield hero mini‑game, cinemati
 - Contact (links + working form)
 
 
-## 🧰 Technologies Used
+##  Technologies Used
 
 - **Frontend**: React 19.1.0 + Vite
 - **Styling**: Tailwind CSS + Custom CSS
@@ -45,7 +45,7 @@ Interactive developer portfolio featuring a starfield hero mini‑game, cinemati
 - **Package Manager**: npm
 
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 My_Portfolio/
@@ -86,7 +86,7 @@ My_Portfolio/
 ```
 
 
-## 🧑‍� Installation & Setup
+##  Installation & Setup
 
 1) Install dependencies
    - npm install
@@ -101,7 +101,7 @@ My_Portfolio/
    - npm run preview
 
 
-## 🔐 Environment Variables (EmailJS)
+##  Environment Variables (EmailJS)
 
 Create a `.env` at the project root:
 
@@ -114,7 +114,7 @@ VITE_EMAILJS_PUBLIC_KEY=your_public_key
 Restart the dev server after editing `.env`.
 
 
-## 📎 Add Resume & Certificates
+##  Add Resume & Certificates
 
 - Resume for the Home “View Resume” button:
   - Place your PDF at: `public/Mohamed_Aslam_Resume.pdf`
@@ -123,7 +123,7 @@ Restart the dev server after editing `.env`.
   - Update titles/paths in `src/components/CertificationsSection.jsx` as needed.
 
 
-## ♿ Accessibility & UX
+##  Accessibility & UX
 
 - Keyboard‑navigable menu and buttons; Escape closes mobile menu.
 - Clear focusable controls; ARIA labels on theme toggle and mobile menu button.
@@ -131,14 +131,14 @@ Restart the dev server after editing `.env`.
 - Smooth scrolling and reduced layout shift during transitions.
 
 
-## ☁️ Deployment
+##  Deployment
 
 - Vercel or Netlify recommended for zero‑config deployments.
 - Set environment variables (EmailJS) in your platform dashboard.
 - Framework preset: Vite. Build command: `npm run build`. Output: `dist`.
 
 
-## 📞 Contact
+##  Contact
 
 - **Email**: [mohamed.aslam.i.2004@gmail.com](mailto:mohamed.aslam.i.2004@gmail.com)
 - **LinkedIn**: [LinkedIn Profile](https://www.linkedin.com/in/mohamed-aslam-i)
