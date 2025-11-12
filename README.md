@@ -6,11 +6,6 @@ Interactive developer portfolio featuring a starfield hero mini‑game, cinemati
 — Tech: React 19, Vite 7, Tailwind CSS , Framer Motion, EmailJS
 
 
-## 🔗 Live Demo
-
-Add your deployment URL here (https://mohamedaslam.tech).
-
-
 ## ✨ Features
 
 - Interactive hero section (Canvas mini‑game)
