@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
-import { Mail, Linkedin, Github, Send } from './Icons';
+import { Linkedin, Github, Send, Instagram } from './Icons';
 import { emailConfig } from '../utils/emailConfig';
 
 const ContactSection = ({ getThemeClasses }) => {
@@ -66,62 +66,46 @@ const ContactSection = ({ getThemeClasses }) => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
             <div className={`${getThemeClasses('cardBg')} group relative overflow-hidden rounded-lg shadow-md p-4 transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg text-center border-2 ${getThemeClasses('techTag')}`}>
               <div className="flex flex-col items-center space-y-3">
-                <div className={`p-3 rounded-full ${getThemeClasses('buttonPrimary')} group-hover:scale-110 transition-transform duration-300`}>
-                  <Mail size={24} className="text-white" />
-                </div>
-                <div>
-                  <p className={`${getThemeClasses('cardTitle')} text-base font-bold font-press-start mb-1`}>
-                    Email
-                  </p>
-                  <a 
-                    href="mailto:mohamed.aslam.i.2004@gmail.com"
-                    className={`${getThemeClasses('cardText')} text-sm font-vt323 hover:underline break-all`}
-                  >
-                    mohamed.aslam.i.2004@gmail.com
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div className={`${getThemeClasses('cardBg')} group relative overflow-hidden rounded-lg shadow-md p-4 transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg text-center border-2 ${getThemeClasses('techTag')}`}>
-              <div className="flex flex-col items-center space-y-3">
-                <div className={`p-3 rounded-full ${getThemeClasses('buttonPrimary')} group-hover:scale-110 transition-transform duration-300`}>
+                <a 
+                  href="https://in.linkedin.com/in/mohamed-aslam-i"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex p-3 rounded-full ${getThemeClasses('buttonPrimary')} group-hover:scale-110 transition-transform duration-300`}
+                  aria-label="Connect on LinkedIn"
+                >
                   <Linkedin size={24} className="text-white" />
-                </div>
-                <div>
-                  <p className={`${getThemeClasses('cardTitle')} text-base font-bold font-press-start mb-1`}>
-                    LinkedIn
-                  </p>
-                  <a 
-                    href="https://in.linkedin.com/in/mohamed-aslam-i"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`${getThemeClasses('cardText')} text-sm font-vt323 hover:underline`}
-                  >
-                    linkedin.com/in/mohamed-aslam-i
-                  </a>
-                </div>
+                </a>
+                <p className={`${getThemeClasses('cardTitle')} text-base font-bold font-press-start`}>LinkedIn</p>
               </div>
             </div>
 
             <div className={`${getThemeClasses('cardBg')} group relative overflow-hidden rounded-lg shadow-md p-4 transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg text-center border-2 ${getThemeClasses('techTag')}`}>
               <div className="flex flex-col items-center space-y-3">
-                <div className={`p-3 rounded-full ${getThemeClasses('buttonPrimary')} group-hover:scale-110 transition-transform duration-300`}>
+                <a 
+                  href="https://github.com/aslam-03"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex p-3 rounded-full ${getThemeClasses('buttonPrimary')} group-hover:scale-110 transition-transform duration-300`}
+                  aria-label="View GitHub profile"
+                >
                   <Github size={24} className="text-white" />
-                </div>
-                <div>
-                  <p className={`${getThemeClasses('cardTitle')} text-base font-bold font-press-start mb-1`}>
-                    GitHub
-                  </p>
-                  <a 
-                    href="https://github.com/aslam-03"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`${getThemeClasses('cardText')} text-sm font-vt323 hover:underline`}
-                  >
-                    github.com/aslam-03
-                  </a>
-                </div>
+                </a>
+                <p className={`${getThemeClasses('cardTitle')} text-base font-bold font-press-start`}>GitHub</p>
+              </div>
+            </div>
+
+            <div className={`${getThemeClasses('cardBg')} group relative overflow-hidden rounded-lg shadow-md p-4 transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg text-center border-2 ${getThemeClasses('techTag')}`}>
+              <div className="flex flex-col items-center space-y-3">
+                <a 
+                  href="https://www.instagram.com/mohamed_aslam._.03?igsh=ZmZvdXZlODQzYzdh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex p-3 rounded-full ${getThemeClasses('buttonPrimary')} group-hover:scale-110 transition-transform duration-300`}
+                  aria-label="Follow on Instagram"
+                >
+                  <Instagram size={24} className="text-white" />
+                </a>
+                <p className={`${getThemeClasses('cardTitle')} text-base font-bold font-press-start`}>Instagram</p>
               </div>
             </div>
           </div>
@@ -143,16 +127,18 @@ const ContactSection = ({ getThemeClasses }) => {
             >
               Name
             </label>
-            <input 
-              type="text" 
-              id="name" 
-              name="name" 
-              value={formData.name}
-              onChange={handleChange}
-              className={`shadow appearance-none rounded-lg w-full py-3 px-4 leading-tight focus:outline-none focus:ring-2 transition-all duration-200 ${getThemeClasses('input')}`} 
-              placeholder="Your Name" 
-              required 
-            />
+            <div className={`${getThemeClasses('cardBg')} rounded-xl transition-all duration-300 focus-within:ring-2 focus-within:ring-blue-400/70`}> 
+              <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                value={formData.name}
+                onChange={handleChange}
+                className={`bg-transparent shadow-none appearance-none rounded-xl w-full py-3 px-4 leading-tight focus:outline-none transition-all duration-200 ${getThemeClasses('inputText')}`} 
+                placeholder="Your Name" 
+                required 
+              />
+            </div>
           </div>
           <div>
             <label 
@@ -161,16 +147,18 @@ const ContactSection = ({ getThemeClasses }) => {
             >
               Email
             </label>
-            <input 
-              type="email" 
-              id="email" 
-              name="email" 
-              value={formData.email}
-              onChange={handleChange}
-              className={`shadow appearance-none rounded-lg w-full py-3 px-4 leading-tight focus:outline-none focus:ring-2 transition-all duration-200 ${getThemeClasses('input')}`} 
-              placeholder="your.email@example.com" 
-              required 
-            />
+            <div className={`${getThemeClasses('cardBg')} rounded-xl transition-all duration-300 focus-within:ring-2 focus-within:ring-blue-400/70`}> 
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                value={formData.email}
+                onChange={handleChange}
+                className={`bg-transparent shadow-none appearance-none rounded-xl w-full py-3 px-4 leading-tight focus:outline-none transition-all duration-200 ${getThemeClasses('inputText')}`} 
+                placeholder="your.email@example.com" 
+                required 
+              />
+            </div>
           </div>
           <div>
             <label 
@@ -179,16 +167,18 @@ const ContactSection = ({ getThemeClasses }) => {
             >
               Message
             </label>
-            <textarea 
-              id="message" 
-              name="message" 
-              rows="6" 
-              value={formData.message}
-              onChange={handleChange}
-              className={`shadow appearance-none rounded-lg w-full py-3 px-4 leading-tight focus:outline-none focus:ring-2 transition-all duration-200 ${getThemeClasses('input')}`} 
-              placeholder="Your message..." 
-              required
-            />
+            <div className={`${getThemeClasses('cardBg')} rounded-xl transition-all duration-300 focus-within:ring-2 focus-within:ring-blue-400/70`}> 
+              <textarea 
+                id="message" 
+                name="message" 
+                rows="6" 
+                value={formData.message}
+                onChange={handleChange}
+                className={`bg-transparent shadow-none appearance-none rounded-xl w-full py-3 px-4 leading-tight focus:outline-none transition-all duration-200 resize-none ${getThemeClasses('inputText')}`} 
+                placeholder="Your message..." 
+                required
+              />
+            </div>
           </div>
           <div className="text-center">
             <button 

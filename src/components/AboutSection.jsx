@@ -6,7 +6,7 @@ const AboutSection = ({ getThemeClasses }) => (
     className={`bg-transparent py-20 px-4 sm:px-6 md:px-8 transition-colors duration-300 scroll-mt-24 md:scroll-mt-28`}
   >
     <div className="container mx-auto">
-      <div className="bg-white/10 dark:bg-black/20 backdrop-blur-sm p-8 sm:p-12 rounded-xl shadow-2xl border border-white/20">
+      <div className={`${getThemeClasses('cardBg')} p-8 sm:p-12 rounded-xl shadow-2xl transition-colors duration-300`}>
         <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
           
           {/* Image Section */}
