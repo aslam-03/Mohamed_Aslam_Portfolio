@@ -1,0 +1,47 @@
+{
+  "name": "Mohamed Aslam | AI & Fullstack Developer Portfolio",
+  "short_name": "Aslam Portfolio",
+  "description": "Interactive AI/ML and fullstack developer portfolio featuring a starfield mini-game, cinematic transitions, and production-ready case studies.",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0b1220",
+  "theme_color": "#0b1220",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["portfolio", "productivity", "business"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "View Projects",
+      "short_name": "Projects",
+      "description": "Jump to highlighted AI and fullstack case studies.",
+      "url": "/#projects"
+    },
+    {
+      "name": "Contact Mohamed",
+      "short_name": "Contact",
+      "description": "Open the EmailJS powered contact form to connect.",
+      "url": "/#contact"
+    }
+  ],
+  "prefer_related_applications": false
+}
