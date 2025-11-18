@@ -1,8 +1,8 @@
-const CACHE_NAME = 'aslam-portfolio-cache-v1';
+const STATIC_CACHE = 'aslam-portfolio-static-v2';
+const RUNTIME_CACHE = 'aslam-portfolio-runtime-v1';
 const OFFLINE_URL = '/offline.html';
 
 const PRECACHE_ASSETS = [
-  '/',
   '/index.html',
   OFFLINE_URL,
   '/manifest.webmanifest',
@@ -20,7 +20,7 @@ const PRECACHE_ASSETS = [
 self.addEventListener('install', (event) => {
   self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_ASSETS))
+    caches.open(STATIC_CACHE).then((cache) => cache.addAll(PRECACHE_ASSETS))
   );
 });
 
@@ -29,12 +29,15 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((keys) =>
       Promise.all(
         keys
-          .filter((key) => key !== CACHE_NAME)
+          .filter((key) => key !== STATIC_CACHE && key !== RUNTIME_CACHE)
           .map((staleKey) => caches.delete(staleKey))
       )
     )
   );
   self.clients.claim();
+  if (self.registration.navigationPreload) {
+    event.waitUntil(self.registration.navigationPreload.enable());
+  }
 });
 
 self.addEventListener('fetch', (event) => {
@@ -49,43 +52,71 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  if (requestURL.origin === self.location.origin) {
-    if (event.request.mode === 'navigate') {
-      event.respondWith(
-        fetch(event.request)
-          .then((response) => {
-            const copy = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
-            return response;
-          })
-          .catch(async () => {
-            const cachedPage = await caches.match(event.request);
-            return cachedPage || caches.match(OFFLINE_URL);
-          })
-      );
-      return;
-    }
-
-    event.respondWith(
-      caches.match(event.request).then((cacheResponse) => {
-        if (cacheResponse) {
-          return cacheResponse;
-        }
-
-        return fetch(event.request)
-          .then((networkResponse) => {
-            const copy = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
-            return networkResponse;
-          })
-          .catch(() => caches.match(OFFLINE_URL));
-      })
-    );
+  if (event.request.mode === 'navigate') {
+    event.respondWith(handleNavigationRequest(event));
     return;
   }
 
-  // For cross-origin requests fall back to network first, offline page if not available.
-  event.respondWith(
-    fetch(event.request).catch(() => caches.match(OFFLINE_URL))
-  );
+  if (requestURL.origin === self.location.origin) {
+    event.respondWith(cacheFirst(event.request));
+    return;
+  }
+
+  event.respondWith(networkFirst(event.request));
 });
+
+async function handleNavigationRequest(event) {
+  try {
+    const preloadResponse = await event.preloadResponse;
+    if (preloadResponse) {
+      return preloadResponse;
+    }
+
+    const networkResponse = await fetch(event.request);
+    const cache = await caches.open(RUNTIME_CACHE);
+    cache.put(event.request, networkResponse.clone());
+    return networkResponse;
+  } catch (error) {
+    const cache = await caches.open(RUNTIME_CACHE);
+    const cachedPage = await cache.match(event.request);
+    if (cachedPage) {
+      return cachedPage;
+    }
+    const staticCache = await caches.open(STATIC_CACHE);
+    const offlineFallback = await staticCache.match(OFFLINE_URL);
+    return offlineFallback || Response.error();
+  }
+}
+
+async function cacheFirst(request) {
+  const cache = await caches.open(STATIC_CACHE);
+  const cachedResponse = await cache.match(request);
+  if (cachedResponse) {
+    return cachedResponse;
+  }
+
+  try {
+    const networkResponse = await fetch(request);
+    const runtimeCache = await caches.open(RUNTIME_CACHE);
+    runtimeCache.put(request, networkResponse.clone());
+    return networkResponse;
+  } catch (error) {
+    return Response.error();
+  }
+}
+
+async function networkFirst(request) {
+  try {
+    const networkResponse = await fetch(request);
+    const cache = await caches.open(RUNTIME_CACHE);
+    cache.put(request, networkResponse.clone());
+    return networkResponse;
+  } catch (error) {
+    const cache = await caches.open(RUNTIME_CACHE);
+    const cachedResponse = await cache.match(request);
+    if (cachedResponse) {
+      return cachedResponse;
+    }
+    return Response.error();
+  }
+}
