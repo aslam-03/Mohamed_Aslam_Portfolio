@@ -1,5 +1,4 @@
-const STATIC_CACHE = 'aslam-portfolio-static-v2';
-const RUNTIME_CACHE = 'aslam-portfolio-runtime-v1';
+const STATIC_CACHE = 'aslam-portfolio-static-v3';
 const OFFLINE_URL = '/offline.html';
 
 const PRECACHE_ASSETS = [
@@ -29,7 +28,7 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((keys) =>
       Promise.all(
         keys
-          .filter((key) => key !== STATIC_CACHE && key !== RUNTIME_CACHE)
+          .filter((key) => key !== STATIC_CACHE)
           .map((staleKey) => caches.delete(staleKey))
       )
     )
@@ -53,19 +52,16 @@ self.addEventListener('fetch', (event) => {
   }
 
   if (event.request.mode === 'navigate') {
-    event.respondWith(handleNavigationRequest(event));
+    event.respondWith(handleNavigation(event));
     return;
   }
 
   if (requestURL.origin === self.location.origin) {
-    event.respondWith(cacheFirst(event.request));
-    return;
+    event.respondWith(handleAssetRequest(event));
   }
-
-  event.respondWith(networkFirst(event.request));
 });
 
-async function handleNavigationRequest(event) {
+async function handleNavigation(event) {
   try {
     const preloadResponse = await event.preloadResponse;
     if (preloadResponse) {
@@ -73,49 +69,41 @@ async function handleNavigationRequest(event) {
     }
 
     const networkResponse = await fetch(event.request);
-    const cache = await caches.open(RUNTIME_CACHE);
+    const cache = await caches.open(STATIC_CACHE);
     cache.put(event.request, networkResponse.clone());
     return networkResponse;
   } catch (error) {
-    const cache = await caches.open(RUNTIME_CACHE);
+    const cache = await caches.open(STATIC_CACHE);
     const cachedPage = await cache.match(event.request);
     if (cachedPage) {
       return cachedPage;
     }
-    const staticCache = await caches.open(STATIC_CACHE);
-    const offlineFallback = await staticCache.match(OFFLINE_URL);
+    const offlineFallback = await cache.match(OFFLINE_URL);
     return offlineFallback || Response.error();
   }
 }
 
-async function cacheFirst(request) {
+async function handleAssetRequest(event) {
   const cache = await caches.open(STATIC_CACHE);
-  const cachedResponse = await cache.match(request);
+  const cachedResponse = await cache.match(event.request);
+
   if (cachedResponse) {
+    event.waitUntil(
+      fetch(event.request)
+        .then((networkResponse) => cache.put(event.request, networkResponse.clone()))
+        .catch(() => {})
+    );
     return cachedResponse;
   }
 
   try {
-    const networkResponse = await fetch(request);
-    const runtimeCache = await caches.open(RUNTIME_CACHE);
-    runtimeCache.put(request, networkResponse.clone());
+    const networkResponse = await fetch(event.request);
+    cache.put(event.request, networkResponse.clone());
     return networkResponse;
   } catch (error) {
-    return Response.error();
-  }
-}
-
-async function networkFirst(request) {
-  try {
-    const networkResponse = await fetch(request);
-    const cache = await caches.open(RUNTIME_CACHE);
-    cache.put(request, networkResponse.clone());
-    return networkResponse;
-  } catch (error) {
-    const cache = await caches.open(RUNTIME_CACHE);
-    const cachedResponse = await cache.match(request);
-    if (cachedResponse) {
-      return cachedResponse;
+    if (event.request.destination === 'document') {
+      const offlineFallback = await cache.match(OFFLINE_URL);
+      return offlineFallback || Response.error();
     }
     return Response.error();
   }
