@@ -12,12 +12,14 @@ import ShootingStarCursor from './components/ShootingStarCursor';
 import ScrollToTop from './components/ScrollToTop';
 import SpaceBackground from './components/SpaceBackground';
 import ThemeTransition from './components/ThemeTransition';
+import Intro from './components/Intro';
 import { getThemeClasses } from './utils/theme';
 import { ModalProvider } from './utils/ModalContext';
 
 const _allSections = ['home', 'about', 'experience', 'skills', 'academia', 'certifications', 'contact'];
 
 function App() {
+  const [showIntro, setShowIntro] = useState(true);
   const [activeSection, setActiveSection] = useState('home');
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem('theme');
@@ -57,7 +59,7 @@ function App() {
   };
 
   const themeClasses = (elementKey) => getThemeClasses(theme, elementKey);
-  
+
   useEffect(() => {
     let isManualScrolling = false;
     let scrollTimeout;
@@ -101,11 +103,12 @@ function App() {
 
   return (
     <ModalProvider>
+      {showIntro && <Intro onComplete={() => setShowIntro(false)} />}
       <div className={themeClasses('body')}>
         {isTransitioning && <ThemeTransition onTransitionComplete={handleTransitionComplete} nextTheme={nextTheme} />}
-        
+
         <ShootingStarCursor />
-        <Navigation 
+        <Navigation
           activeSection={activeSection}
           scrollToSection={scrollToSection}
           theme={theme}
@@ -114,33 +117,33 @@ function App() {
         />
 
         <main className="pt-16">
-          <HomeSection 
+          <HomeSection
             scrollToSection={scrollToSection}
             theme={theme}
             getThemeClasses={themeClasses}
           />
           <div id="content-wrapper" className="unified-bg relative min-h-screen">
-            <AboutSection 
+            <AboutSection
               theme={theme}
               getThemeClasses={themeClasses}
             />
-            <ExperienceSection 
+            <ExperienceSection
               theme={theme}
               getThemeClasses={themeClasses}
             />
-            <SkillsSection 
+            <SkillsSection
               theme={theme}
               getThemeClasses={themeClasses}
             />
-            <AcademiaSection 
+            <AcademiaSection
               theme={theme}
               getThemeClasses={themeClasses}
             />
-            <CertificationsSection 
+            <CertificationsSection
               theme={theme}
               getThemeClasses={themeClasses}
             />
-            <ContactSection 
+            <ContactSection
               theme={theme}
               getThemeClasses={themeClasses}
             />
