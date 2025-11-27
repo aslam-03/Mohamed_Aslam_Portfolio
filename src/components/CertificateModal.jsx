@@ -1,18 +1,30 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 const CertificateModal = ({ isOpen, onClose, certificate }) => {
-  if (!isOpen || !certificate) return null;
+  const isOther = Array.isArray(certificate?.certificates);
+  const certificatesList = isOther ? certificate.certificates : null;
+  const initialIndex = isOther ? certificate?.current ?? 0 : 0;
 
-  // Support navigation for 'Other Certification' card
-  const isOther = Array.isArray(certificate.certificates);
-  const [current, setCurrent] = useState(isOther ? certificate.current : 0);
-  const cert = isOther ? certificate.certificates[current] : certificate;
+  const [current, setCurrent] = useState(initialIndex);
+
+  useEffect(() => {
+    setCurrent(initialIndex);
+  }, [initialIndex, certificate?.certificateUrl, certificate?.title]);
+
+  const cert = useMemo(() => {
+    if (isOther) {
+      return certificatesList?.[current] ?? certificatesList?.[0] ?? null;
+    }
+    return certificate ?? null;
+  }, [certificatesList, current, certificate, isOther]);
+
+  if (!isOpen || !cert) return null;
   const { certificateUrl, title, provider, description, date } = cert;
   const isImage = /\.(png|jpg|jpeg|webp)$/i.test(certificateUrl);
 
   const handleNext = () => {
-    if (isOther && current < certificate.certificates.length - 1) {
+    if (isOther && certificatesList && current < certificatesList.length - 1) {
       setCurrent(current + 1);
     }
   };

@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion';
-
 const AboutSection = ({ getThemeClasses }) => (
   <section 
     id="about" 
@@ -10,27 +8,19 @@ const AboutSection = ({ getThemeClasses }) => (
         <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
           
           {/* Image Section */}
-          <motion.div 
-            className="md:w-1/3 flex-shrink-0"
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+          <div 
+            className="md:w-1/3 flex-shrink-0 reveal-item"
           >
             <img 
               src="/Aslam.jpg" 
               alt="Aslam" 
               className="rounded-full shadow-lg w-56 h-56 sm:w-64 sm:h-64 object-cover mx-auto border-4 border-gray-400 dark:border-gray-600 hover:scale-105 transition-transform duration-300"
             />
-          </motion.div>
+          </div>
           
           {/* Content Section */}
-          <motion.div 
-            className="md:w-2/3 text-center md:text-left"
-            initial={{ opacity: 0, x: 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          <div 
+            className="md:w-2/3 text-center md:text-left reveal-item"
           >
             {/* Section header */}
             <div className="mb-6">
@@ -45,7 +35,7 @@ const AboutSection = ({ getThemeClasses }) => (
                 Innovative AI & Data Science undergraduate with hands-on experience in Machine Learning, Generative AI, and Full-Stack Web Development. Skilled in designing intelligent systems and end-to-end web solutions integrating AI capabilities. Proven track record of building impactful projects including a Legal Document Analyzer and Real-time Sign Language Translator. Recognized for strong problem-solving, collaboration, and adaptability with a passion for building deployable, real-world AI systems.
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </div>

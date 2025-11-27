@@ -1,5 +1,6 @@
-import { Suspense } from 'react';
-import HeroAnimation from './HeroAnimation';
+import { Suspense, lazy } from 'react';
+
+const HeroAnimation = lazy(() => import('./HeroAnimation'));
 import { Eye, Mail } from './Icons';
 
 const HomeSection = ({ scrollToSection, theme, getThemeClasses }) => (

@@ -25,7 +25,6 @@ const SpaceBackground = () => {
 
     // Watch for theme changes
     const themeObserver = new MutationObserver(() => {
-      console.log('Theme change detected');
       applyBackgroundBasedOnTheme();
     });
 

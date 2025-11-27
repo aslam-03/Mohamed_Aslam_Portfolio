@@ -1,7 +1,5 @@
-import React, { createContext, useState, useContext } from 'react';
-
-// Create context
-const ModalContext = createContext();
+import { useState } from 'react';
+import ModalContext from './modalContextStore';
 
 // Provider component
 export const ModalProvider = ({ children }) => {
@@ -55,13 +53,4 @@ export const ModalProvider = ({ children }) => {
       )}
     </ModalContext.Provider>
   );
-};
-
-// Custom hook to use the modal context
-export const useModal = () => {
-  const context = useContext(ModalContext);
-  if (!context) {
-    throw new Error('useModal must be used within a ModalProvider');
-  }
-  return context;
 };

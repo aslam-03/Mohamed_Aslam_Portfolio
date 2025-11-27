@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useModal } from '../utils/ModalContext';
-import getSkillIcon from './SkillIcons';
+import useModal from '../hooks/useModal';
+import SkillIcon from './SkillIcons';
 
 // Certificate Modal Content Component
 const CertificateModalContent = ({ certificateData }) => {
@@ -206,7 +206,7 @@ const SkillCard = ({ skill, getThemeClasses }) => {
       <div
         className={`${getThemeClasses('skillIconChip')} mb-4 flex h-20 w-20 items-center justify-center rounded-full transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_26px_60px_-32px_rgba(59,130,246,0.50)]`}
       >
-        {getSkillIcon(skill, { size: 46 })}
+        <SkillIcon skill={skill} size={46} />
       </div>
       <h3
         className={`${getThemeClasses('cardTitle')} font-press-start font-semibold`}
@@ -336,7 +336,7 @@ const SkillCategoryCard = ({ title, skills, tagline, getThemeClasses }) => (
               <div
                 className={`${getThemeClasses('skillIconChip')} mb-2 flex h-16 w-16 items-center justify-center rounded-full transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_22px_52px_-30px_rgba(59,130,246,0.45)]`}
               >
-                {getSkillIcon(skill, { size: 34 })}
+                <SkillIcon skill={skill} size={34} />
               </div>
               <span className={`${getThemeClasses('cardText')} text-sm font-vt323 text-center leading-tight wave-item`}>
                 {skill}

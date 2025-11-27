@@ -2,6 +2,7 @@ import React from 'react';
 import dagshubLogo from '../assets/logos/dagshub.png';
 import css from '../assets/logos/css3.png';
 import vscode from '../assets/logos/vscode2.png'; 
+
 const Badge = ({ children, size = 48, bg = '#111827', color = 'white' }) => {
   const text = String(children || '');
   // reduce font size for longer labels so they fit inside the circle
@@ -114,8 +115,7 @@ export const LogoImg = ({ src, alt = '', size = 48 }) => {
 export const GenericIcon = ({ label, size = 48 }) => (
   <Badge size={size} bg="#6B7280">{label && label.length ? label[0].toUpperCase() : '?'}</Badge>
 );
-
-export function getSkillIcon(skill, props = {}) {
+const renderSkillIcon = (skill, props = {}) => {
   if (!skill) return <GenericIcon {...props} label="?" />;
   const s = skill.toLowerCase();
   // explicit soft-skill shortcodes
@@ -159,6 +159,8 @@ export function getSkillIcon(skill, props = {}) {
   // fallback
   // fallback
   return <GenericIcon {...props} label={skill} />;
-}
+};
 
-export default getSkillIcon;
+const SkillIcon = ({ skill, size = 48 }) => renderSkillIcon(skill, { size });
+
+export default SkillIcon;
