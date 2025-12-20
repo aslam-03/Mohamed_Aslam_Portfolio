@@ -50,9 +50,9 @@ const ContactSection = ({ getThemeClasses }) => {
   };
 
   return (
-    <section 
-      id="contact" 
-      className={`bg-transparent py-10 px-2 sm:px-4 md:px-8 transition-colors duration-300 scroll-mt-24 md:scroll-mt-28`}
+    <section
+      id="contact"
+      className={`bg-transparent pt-0 pb-10 px-2 sm:px-4 md:px-8 transition-colors duration-300`}
     >
       <div className="container mx-auto text-center">
         <h2 className={`${getThemeClasses('heading')} text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-10 md:mb-12 border-b-4 pb-2 sm:pb-4 inline-block font-press-start`}>
@@ -66,7 +66,7 @@ const ContactSection = ({ getThemeClasses }) => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
             <div className={`${getThemeClasses('cardBg')} group relative overflow-hidden rounded-lg shadow-md p-4 transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg text-center border-2 ${getThemeClasses('techTag')}`}>
               <div className="flex flex-col items-center space-y-3">
-                <a 
+                <a
                   href="https://in.linkedin.com/in/mohamed-aslam-i"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -81,7 +81,7 @@ const ContactSection = ({ getThemeClasses }) => {
 
             <div className={`${getThemeClasses('cardBg')} group relative overflow-hidden rounded-lg shadow-md p-4 transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg text-center border-2 ${getThemeClasses('techTag')}`}>
               <div className="flex flex-col items-center space-y-3">
-                <a 
+                <a
                   href="https://github.com/aslam-03"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -96,7 +96,7 @@ const ContactSection = ({ getThemeClasses }) => {
 
             <div className={`${getThemeClasses('cardBg')} group relative overflow-hidden rounded-lg shadow-md p-4 transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg text-center border-2 ${getThemeClasses('techTag')}`}>
               <div className="flex flex-col items-center space-y-3">
-                <a 
+                <a
                   href="https://www.instagram.com/mohamed_aslam._.03?igsh=ZmZvdXZlODQzYzdh"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -109,92 +109,92 @@ const ContactSection = ({ getThemeClasses }) => {
               </div>
             </div>
           </div>
-        <form className="space-y-6 text-left" onSubmit={handleSubmit}>
-          {submitStatus === 'success' && (
-            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
-              Message sent successfully! I'll get back to you soon.
+          <form className="space-y-6 text-left" onSubmit={handleSubmit}>
+            {submitStatus === 'success' && (
+              <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                Message sent successfully! I'll get back to you soon.
+              </div>
+            )}
+            {submitStatus === 'error' && (
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                Failed to send message. Please try again or contact me directly.
+              </div>
+            )}
+            <div>
+              <label
+                htmlFor="name"
+                className={`${getThemeClasses('paragraph')} block text-sm font-bold mb-2`}
+              >
+                Name
+              </label>
+              <div className={`${getThemeClasses('cardBg')} rounded-xl transition-all duration-300 focus-within:ring-2 focus-within:ring-blue-400/70`}>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className={`bg-transparent shadow-none appearance-none rounded-xl w-full py-3 px-4 leading-tight focus:outline-none transition-all duration-200 ${getThemeClasses('inputText')}`}
+                  placeholder="Your Name"
+                  required
+                />
+              </div>
             </div>
-          )}
-          {submitStatus === 'error' && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-              Failed to send message. Please try again or contact me directly.
+            <div>
+              <label
+                htmlFor="email"
+                className={`${getThemeClasses('paragraph')} block text-sm font-bold mb-2`}
+              >
+                Email
+              </label>
+              <div className={`${getThemeClasses('cardBg')} rounded-xl transition-all duration-300 focus-within:ring-2 focus-within:ring-blue-400/70`}>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={`bg-transparent shadow-none appearance-none rounded-xl w-full py-3 px-4 leading-tight focus:outline-none transition-all duration-200 ${getThemeClasses('inputText')}`}
+                  placeholder="your.email@example.com"
+                  required
+                />
+              </div>
             </div>
-          )}
-          <div>
-            <label 
-              htmlFor="name" 
-              className={`${getThemeClasses('paragraph')} block text-sm font-bold mb-2`}
-            >
-              Name
-            </label>
-            <div className={`${getThemeClasses('cardBg')} rounded-xl transition-all duration-300 focus-within:ring-2 focus-within:ring-blue-400/70`}> 
-              <input 
-                type="text" 
-                id="name" 
-                name="name" 
-                value={formData.name}
-                onChange={handleChange}
-                className={`bg-transparent shadow-none appearance-none rounded-xl w-full py-3 px-4 leading-tight focus:outline-none transition-all duration-200 ${getThemeClasses('inputText')}`} 
-                placeholder="Your Name" 
-                required 
-              />
+            <div>
+              <label
+                htmlFor="message"
+                className={`${getThemeClasses('paragraph')} block text-sm font-bold mb-2`}
+              >
+                Message
+              </label>
+              <div className={`${getThemeClasses('cardBg')} rounded-xl transition-all duration-300 focus-within:ring-2 focus-within:ring-blue-400/70`}>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="6"
+                  value={formData.message}
+                  onChange={handleChange}
+                  className={`bg-transparent shadow-none appearance-none rounded-xl w-full py-3 px-4 leading-tight focus:outline-none transition-all duration-200 resize-none ${getThemeClasses('inputText')}`}
+                  placeholder="Your message..."
+                  required
+                />
+              </div>
             </div>
-          </div>
-          <div>
-            <label 
-              htmlFor="email" 
-              className={`${getThemeClasses('paragraph')} block text-sm font-bold mb-2`}
-            >
-              Email
-            </label>
-            <div className={`${getThemeClasses('cardBg')} rounded-xl transition-all duration-300 focus-within:ring-2 focus-within:ring-blue-400/70`}> 
-              <input 
-                type="email" 
-                id="email" 
-                name="email" 
-                value={formData.email}
-                onChange={handleChange}
-                className={`bg-transparent shadow-none appearance-none rounded-xl w-full py-3 px-4 leading-tight focus:outline-none transition-all duration-200 ${getThemeClasses('inputText')}`} 
-                placeholder="your.email@example.com" 
-                required 
-              />
+            <div className="text-center">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className={`${getThemeClasses('buttonPrimary')} inline-flex items-center px-8 py-4 font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed`}
+              >
+                <Send className="mr-2" size={20} />
+                {isSubmitting ? 'Sending...' : 'Send Message'}
+              </button>
             </div>
-          </div>
-          <div>
-            <label 
-              htmlFor="message" 
-              className={`${getThemeClasses('paragraph')} block text-sm font-bold mb-2`}
-            >
-              Message
-            </label>
-            <div className={`${getThemeClasses('cardBg')} rounded-xl transition-all duration-300 focus-within:ring-2 focus-within:ring-blue-400/70`}> 
-              <textarea 
-                id="message" 
-                name="message" 
-                rows="6" 
-                value={formData.message}
-                onChange={handleChange}
-                className={`bg-transparent shadow-none appearance-none rounded-xl w-full py-3 px-4 leading-tight focus:outline-none transition-all duration-200 resize-none ${getThemeClasses('inputText')}`} 
-                placeholder="Your message..." 
-                required
-              />
-            </div>
-          </div>
-          <div className="text-center">
-            <button 
-              type="submit" 
-              disabled={isSubmitting}
-              className={`${getThemeClasses('buttonPrimary')} inline-flex items-center px-8 py-4 font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed`}
-            >
-              <Send className="mr-2" size={20} /> 
-              {isSubmitting ? 'Sending...' : 'Send Message'}
-            </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
 };
 
 export default ContactSection;

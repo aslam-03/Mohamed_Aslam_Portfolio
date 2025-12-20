@@ -1,25 +1,25 @@
 const AboutSection = ({ getThemeClasses }) => (
-  <section 
-    id="about" 
-    className={`bg-transparent py-20 px-4 sm:px-6 md:px-8 transition-colors duration-300 scroll-mt-24 md:scroll-mt-28`}
+  <section
+    id="about"
+    className={`bg-transparent py-20 px-4 sm:px-6 md:px-8 transition-colors duration-300`}
   >
     <div className="container mx-auto">
       <div className={`${getThemeClasses('cardBg')} p-8 sm:p-12 rounded-xl shadow-2xl transition-colors duration-300`}>
         <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-          
+
           {/* Image Section */}
-          <div 
+          <div
             className="md:w-1/3 flex-shrink-0 reveal-item"
           >
-            <img 
-              src="/Aslam.jpg" 
-              alt="Aslam" 
+            <img
+              src="/Aslam.jpeg"
+              alt="Aslam"
               className="rounded-full shadow-lg w-56 h-56 sm:w-64 sm:h-64 object-cover mx-auto border-4 border-gray-400 dark:border-gray-600 hover:scale-105 transition-transform duration-300"
             />
           </div>
-          
+
           {/* Content Section */}
-          <div 
+          <div
             className="md:w-2/3 text-center md:text-left reveal-item"
           >
             {/* Section header */}
@@ -28,7 +28,7 @@ const AboutSection = ({ getThemeClasses }) => (
                 About Me
               </h2>
             </div>
-            
+
             {/* Content - Left aligned text */}
             <div className="max-w-4xl">
               <p className={`${getThemeClasses('paragraph')} text-base sm:text-lg md:text-xl leading-relaxed font-vt323`}>

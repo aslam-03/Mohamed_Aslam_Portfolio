@@ -53,7 +53,7 @@ const Intro = ({ onComplete }) => {
         },
         particles: {
             number: {
-                value: 150,
+                value: 80,
                 density: {
                     enable: true,
                     area: 800,

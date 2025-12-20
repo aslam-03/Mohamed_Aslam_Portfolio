@@ -79,7 +79,8 @@ const TrueFocus = ({
                                     : `blur(${blurAmount}px)`,
                             '--border-color': borderColor,
                             '--glow-color': glowColor,
-                            transition: `filter ${animationDuration}s ease`
+                            transition: `filter ${animationDuration}s ease`,
+                            willChange: 'filter'
                         }}
                         onMouseEnter={() => handleMouseEnter(index)}
                         onMouseLeave={handleMouseLeave}
