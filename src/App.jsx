@@ -116,7 +116,7 @@ function App() {
           getThemeClasses={themeClasses}
         />
 
-        <main className="pt-16">
+        <main className="">
           <HomeSection
             scrollToSection={scrollToSection}
             theme={theme}

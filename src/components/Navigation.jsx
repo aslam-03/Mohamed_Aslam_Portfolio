@@ -1,24 +1,20 @@
 
 import { useState, useRef, useEffect } from 'react';
-import { Home, User, GraduationCap, Briefcase, Code, Award, Mail, Sun, Moon } from './Icons';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Home, User, GraduationCap, Briefcase, Code, Award, Mail } from './Icons';
+import ThemeToggle from './ThemeToggle';
 
-const NavItem = ({ icon, label, sectionId, activeSection, onClick, getThemeClasses }) => {
-  const isActive = activeSection === sectionId;
-  const IconComponent = icon;
-  return (
-    <button 
-      type="button"
-      onClick={() => onClick(sectionId)} 
-      className={`${isActive ? getThemeClasses('navItemActive') : getThemeClasses('navItem')} flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-300`}
-    >
-      <IconComponent size={18} />
-      <span className="font-vt323">{label}</span>
-    </button>
-  );
-};
+const navItems = [
+  { name: 'Home', url: 'home', icon: Home },
+  { name: 'About', url: 'about', icon: User },
+  { name: 'Experience', url: 'experience', icon: Briefcase },
+  { name: 'Skills', url: 'skills', icon: Code },
+  { name: 'Projects', url: 'academia', icon: GraduationCap },
+  { name: 'Certifications', url: 'certifications', icon: Award },
+  { name: 'Contact', url: 'contact', icon: Mail },
+];
 
-
-const Navigation = ({ activeSection, scrollToSection, theme, toggleTheme, getThemeClasses }) => {
+const Navigation = ({ activeSection, scrollToSection, theme, toggleTheme }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const navRef = useRef(null);
 
@@ -26,7 +22,6 @@ const Navigation = ({ activeSection, scrollToSection, theme, toggleTheme, getThe
     if (!mobileOpen) return;
 
     const handleOutsideClick = (e) => {
-      // If click is outside the navRef element, close mobile menu
       if (navRef.current && !navRef.current.contains(e.target)) {
         setMobileOpen(false);
       }
@@ -47,129 +42,134 @@ const Navigation = ({ activeSection, scrollToSection, theme, toggleTheme, getThe
     };
   }, [mobileOpen]);
 
-  const handleNavClick = (sectionId) => {
-    if (!sectionId || typeof sectionId !== 'string') return;
-    const id = sectionId.trim();
-    scrollToSection(id);
-    setMobileOpen(false);
-  };
-
   return (
-  <nav ref={navRef} className={`${getThemeClasses('nav')} fixed top-0 left-0 right-0 z-50 shadow-lg transition-colors duration-300`}>
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-        <div className={`${getThemeClasses('navText')} text-2xl font-bold transition-colors duration-300 font-press-start`}>
-          IM ASLAM
-        </div>
-        {/* Desktop Nav */}
-        <div className="hidden lg:flex space-x-4 items-center">
-          {/* Centralized nav items to ensure desktop/mobile parity */}
-          {[
-            { icon: Home, label: 'Home', sectionId: 'home' },
-            { icon: User, label: 'About', sectionId: 'about' },
-            { icon: Briefcase, label: 'Experience', sectionId: 'experience' },
-            { icon: Code, label: 'Skills', sectionId: 'skills' },
-            { icon: GraduationCap, label: 'Projects', sectionId: 'academia' },
-            { icon: Award, label: 'Certifications', sectionId: 'certifications' },
-            { icon: Mail, label: 'Contact', sectionId: 'contact' },
-          ].map(item => (
-            <NavItem
-              key={item.sectionId}
-              icon={item.icon}
-              label={item.label}
-              sectionId={item.sectionId}
-              activeSection={activeSection}
-              onClick={handleNavClick}
-              getThemeClasses={getThemeClasses}
-            />
-          ))}
-          <button 
-            onClick={toggleTheme} 
-            className={`${getThemeClasses('navItem')} flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-300`} 
-            aria-label="Toggle theme"
+    <div className="fixed top-6 z-50 w-full max-w-fit px-4 sm:px-0 left-0 md:left-1/2 md:-translate-x-1/2 transition-all duration-300" ref={navRef}>
+      <motion.div
+        layout
+        className={`
+          flex items-center gap-2 sm:gap-4 py-2 px-4 rounded-full shadow-lg border backdrop-blur-md transition-all duration-300
+          bg-white/10 border-white/20 dark:bg-black/20 dark:border-white/10
+        `}
+      >
+        {/* Mobile Burger Button */}
+        <div className="md:hidden">
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-white/10 transition-colors"
+            aria-label="Toggle Menu"
           >
-            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            <motion.div
+              animate={mobileOpen ? "open" : "closed"}
+              className="w-6 h-6 flex flex-col justify-center items-center gap-1.5"
+            >
+              <motion.span
+                variants={{ closed: { rotate: 0, y: 0 }, open: { rotate: 45, y: 5.5 } }}
+                className="w-5 h-0.5 bg-current block rounded-full origin-center"
+              />
+              <motion.span
+                variants={{ closed: { opacity: 1 }, open: { opacity: 0 } }}
+                className="w-5 h-0.5 bg-current block rounded-full"
+              />
+              <motion.span
+                variants={{ closed: { rotate: 0, y: 0 }, open: { rotate: -45, y: -5.5 } }}
+                className="w-5 h-0.5 bg-current block rounded-full origin-center"
+              />
+            </motion.div>
           </button>
         </div>
-        {/* Mobile Burger Button */}
-        <button
-          className={`lg:hidden flex items-center px-3 py-2 rounded-lg focus:outline-none transition-all duration-300
-            ${mobileOpen
-              ? 'bg-white/80 dark:bg-gray-900/80 shadow-lg'
-              : 'bg-white/30 dark:bg-gray-900/30 hover:bg-white/50 dark:hover:bg-gray-900/50'}
-            border border-transparent`}
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle navigation menu"
-        >
-          <svg className="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </div>
-      {/* Mobile Nav Items */}
-      <div
-        className={`lg:hidden absolute right-4 z-40 transition-all duration-500 ${mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-        style={{ top: '60px', width: 'fit-content', minWidth: '220px' }}
-        aria-hidden={!mobileOpen}
-      >
-        <div className={`bg-white/90 dark:bg-gray-900/90 shadow-2xl px-6 pt-6 pb-8 space-y-3 flex flex-col items-start rounded-b-2xl animate-slide-down`}
-          style={{ transform: mobileOpen ? 'translateY(0)' : 'translateY(-30px)', transition: 'transform 0.4s cubic-bezier(0.4,0,0.2,1)', minWidth: '220px', maxWidth: '90vw' }}
-        >
-          {[
-            { icon: Home, label: 'Home', sectionId: 'home' },
-            { icon: User, label: 'About', sectionId: 'about' },
-            { icon: Briefcase, label: 'Experience', sectionId: 'experience' },
-            { icon: Code, label: 'Skills', sectionId: 'skills' },
-            { icon: GraduationCap, label: 'Projects', sectionId: 'academia' },
-            { icon: Award, label: 'Certifications', sectionId: 'certifications' },
-            { icon: Mail, label: 'Contact', sectionId: 'contact' },
-          ].map((item, idx) => (
-            <div
-              key={item.sectionId}
-              style={{
-                animation: mobileOpen ? `fade-in-stagger 0.4s ${0.08 * idx + 0.08}s both` : 'none',
-                width: '100%'
-              }}
-            >
-              <NavItem
-                icon={item.icon}
-                label={item.label}
-                sectionId={item.sectionId}
-                activeSection={activeSection}
-                onClick={handleNavClick}
-                getThemeClasses={getThemeClasses}
-              />
-            </div>
-          ))}
-          <div
-            style={{
-              animation: mobileOpen ? `fade-in-stagger 0.4s ${0.08 * 7 + 0.08}s both` : 'none',
-              width: '100%'
-            }}
-          >
-            <button
-              onClick={toggleTheme}
-              className={`${getThemeClasses('navItem')} flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-300`}
-              aria-label="Toggle theme"
-            >
-              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-          </div>
+
+        {/* Desktop Nav Items */}
+        <div className="hidden md:flex items-center gap-1">
+          {navItems.map((item) => {
+            const isActive = activeSection === item.url;
+            return (
+              <button
+                key={item.name}
+                onClick={() => scrollToSection(item.url)}
+                className={`
+                  relative cursor-pointer text-sm font-semibold px-4 py-2 rounded-full transition-colors z-10
+                  ${isActive
+                    ? 'text-blue-600 dark:text-cyan-400'
+                    : 'text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-cyan-300'}
+                  font-vt323 tracking-wide
+                `}
+              >
+                {item.name}
+                {isActive && (
+                  <motion.div
+                    layoutId="lamp"
+                    className="absolute inset-0 w-full bg-blue-500/5 dark:bg-cyan-400/10 rounded-full -z-10"
+                    initial={false}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 30,
+                    }}
+                  >
+                    <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-1 bg-blue-500 dark:bg-cyan-400 rounded-t-full">
+                      <div className="absolute w-12 h-6 bg-blue-500/20 dark:bg-cyan-400/20 rounded-full blur-md -top-2 -left-2" />
+                      <div className="absolute w-8 h-6 bg-blue-500/20 dark:bg-cyan-400/20 rounded-full blur-md -top-1" />
+                      <div className="absolute w-4 h-4 bg-blue-500/20 dark:bg-cyan-400/20 rounded-full blur-sm top-0 left-2" />
+                    </div>
+                  </motion.div>
+                )}
+              </button>
+            );
+          })}
         </div>
-        <style jsx>{`
-          @keyframes slide-down {
-            0% { opacity: 0; transform: translateY(-30px); }
-            100% { opacity: 1; transform: translateY(0); }
-          }
-          .animate-slide-down {
-            animation: slide-down 0.4s cubic-bezier(0.4,0,0.2,1) both;
-          }
-          @keyframes fade-in-stagger {
-            0% { opacity: 0; transform: translateY(-10px); }
-            100% { opacity: 1; transform: translateY(0); }
-          }
-        `}</style>
-      </div>
-    </nav>
+
+        {/* Theme Toggle Button */}
+        <div className="pl-2 border-l border-gray-400/20 dark:border-white/10 ml-1">
+          <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+        </div>
+      </motion.div>
+
+      {/* Mobile Menu Dropdown */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className={`
+              md:hidden absolute top-full left-0 mt-3 w-56 p-2 rounded-2xl shadow-xl border backdrop-blur-xl
+              bg-white/80 border-white/20 dark:bg-gray-900/80 dark:border-white/10
+              flex flex-col gap-1 overflow-hidden
+            `}
+          >
+            {navItems.map((item, idx) => {
+              const Icon = item.icon;
+              const isActive = activeSection === item.url;
+              return (
+                <motion.button
+                  key={item.name}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: idx * 0.05 }}
+                  onClick={() => {
+                    scrollToSection(item.url);
+                    setMobileOpen(false);
+                  }}
+                  className={`
+                    w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors
+                    ${isActive
+                      ? 'bg-blue-50 dark:bg-white/5 text-blue-600 dark:text-cyan-400'
+                      : 'text-gray-600 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/5'}
+                  `}
+                >
+                  <Icon size={18} />
+                  <span className="font-vt323 text-lg">{item.name}</span>
+                  {isActive && (
+                    <motion.div className="ml-auto w-1.5 h-1.5 rounded-full bg-current" layoutId="mobile-dot" />
+                  )}
+                </motion.button>
+              );
+            })}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };
 
