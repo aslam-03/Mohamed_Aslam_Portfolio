@@ -21,6 +21,9 @@ const TrueFocus = ({
 
     useEffect(() => {
         if (!manualMode) {
+            // Guarantee start from first word when auto mode begins
+            setCurrentIndex(0);
+
             const interval = setInterval(
                 () => {
                     setCurrentIndex(prev => (prev + 1) % words.length);
@@ -36,16 +39,33 @@ const TrueFocus = ({
         if (currentIndex === null || currentIndex === -1) return;
         if (!wordRefs.current[currentIndex] || !containerRef.current) return;
 
-        const parentRect = containerRef.current.getBoundingClientRect();
-        const activeRect = wordRefs.current[currentIndex].getBoundingClientRect();
+        const updateRect = () => {
+            if (!wordRefs.current[currentIndex] || !containerRef.current) return;
+            const parentRect = containerRef.current.getBoundingClientRect();
+            const activeRect = wordRefs.current[currentIndex].getBoundingClientRect();
 
-        setFocusRect({
-            x: activeRect.left - parentRect.left,
-            y: activeRect.top - parentRect.top,
-            width: activeRect.width,
-            height: activeRect.height
-        });
-    }, [currentIndex, words.length]);
+            setFocusRect({
+                x: activeRect.left - parentRect.left,
+                y: activeRect.top - parentRect.top,
+                width: activeRect.width,
+                height: activeRect.height
+            });
+        };
+
+        updateRect();
+
+        const observer = new ResizeObserver(updateRect);
+        if (wordRefs.current[currentIndex]) {
+            observer.observe(wordRefs.current[currentIndex]);
+        }
+
+        window.addEventListener('resize', updateRect);
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener('resize', updateRect);
+        };
+    }, [currentIndex, words.length, manualMode]);
 
     const handleMouseEnter = index => {
         if (manualMode) {
