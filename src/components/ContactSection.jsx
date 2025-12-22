@@ -2,6 +2,7 @@ import { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { Linkedin, Github, Send, Instagram } from './Icons';
 import { emailConfig } from '../utils/emailConfig';
+import MagicCard from './MagicCard';
 
 const ContactSection = ({ getThemeClasses }) => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,8 @@ const ContactSection = ({ getThemeClasses }) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
+
+  const glowColor = '0, 255, 255';
 
   const handleChange = (e) => {
     setFormData({
@@ -58,13 +61,24 @@ const ContactSection = ({ getThemeClasses }) => {
         <h2 className={`${getThemeClasses('heading')} text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-10 md:mb-12 border-b-4 pb-2 sm:pb-4 inline-block font-press-start`}>
           Contact Me
         </h2>
-        <div className={`max-w-3xl mx-auto p-4 sm:p-6 md:p-8 rounded-xl shadow-lg border transition-colors duration-300 ${getThemeClasses('cardBg')}`}>
+        <MagicCard
+          className={`max-w-3xl mx-auto p-4 sm:p-6 md:p-8 rounded-xl shadow-lg border transition-colors duration-300 ${getThemeClasses('cardBg')}`}
+          glowColor={glowColor}
+          enableBorderGlow={true}
+          enableParticles={true}
+        >
           <p className={`${getThemeClasses('paragraph')} text-lg text-center mb-8 font-vt323`}>
             Feel free to reach out for collaborations, job opportunities, or just to say hello!
           </p>
           {/* Contact Links - Three column layout for better visual balance */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
-            <div className={`${getThemeClasses('cardBg')} group relative overflow-hidden rounded-lg shadow-md p-4 transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg text-center border-2 ${getThemeClasses('techTag')}`}>
+            <MagicCard
+              className={`${getThemeClasses('cardBg')} group relative overflow-hidden rounded-lg shadow-md p-4 transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg text-center border-2 ${getThemeClasses('techTag')}`}
+              glowColor={glowColor}
+              enableBorderGlow={true}
+              enableParticles={true}
+              particleCount={5}
+            >
               <div className="flex flex-col items-center space-y-3">
                 <a
                   href="https://in.linkedin.com/in/mohamed-aslam-i"
@@ -77,9 +91,15 @@ const ContactSection = ({ getThemeClasses }) => {
                 </a>
                 <p className={`${getThemeClasses('cardTitle')} text-base font-bold font-press-start`}>LinkedIn</p>
               </div>
-            </div>
+            </MagicCard>
 
-            <div className={`${getThemeClasses('cardBg')} group relative overflow-hidden rounded-lg shadow-md p-4 transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg text-center border-2 ${getThemeClasses('techTag')}`}>
+            <MagicCard
+              className={`${getThemeClasses('cardBg')} group relative overflow-hidden rounded-lg shadow-md p-4 transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg text-center border-2 ${getThemeClasses('techTag')}`}
+              glowColor={glowColor}
+              enableBorderGlow={true}
+              enableParticles={true}
+              particleCount={5}
+            >
               <div className="flex flex-col items-center space-y-3">
                 <a
                   href="https://github.com/aslam-03"
@@ -92,9 +112,15 @@ const ContactSection = ({ getThemeClasses }) => {
                 </a>
                 <p className={`${getThemeClasses('cardTitle')} text-base font-bold font-press-start`}>GitHub</p>
               </div>
-            </div>
+            </MagicCard>
 
-            <div className={`${getThemeClasses('cardBg')} group relative overflow-hidden rounded-lg shadow-md p-4 transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg text-center border-2 ${getThemeClasses('techTag')}`}>
+            <MagicCard
+              className={`${getThemeClasses('cardBg')} group relative overflow-hidden rounded-lg shadow-md p-4 transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg text-center border-2 ${getThemeClasses('techTag')}`}
+              glowColor={glowColor}
+              enableBorderGlow={true}
+              enableParticles={true}
+              particleCount={5}
+            >
               <div className="flex flex-col items-center space-y-3">
                 <a
                   href="https://www.instagram.com/mohamed_aslam._.03?igsh=ZmZvdXZlODQzYzdh"
@@ -107,7 +133,7 @@ const ContactSection = ({ getThemeClasses }) => {
                 </a>
                 <p className={`${getThemeClasses('cardTitle')} text-base font-bold font-press-start`}>Instagram</p>
               </div>
-            </div>
+            </MagicCard>
           </div>
           <form className="space-y-6 text-left" onSubmit={handleSubmit}>
             {submitStatus === 'success' && (
@@ -191,7 +217,7 @@ const ContactSection = ({ getThemeClasses }) => {
               </button>
             </div>
           </form>
-        </div>
+        </MagicCard>
       </div>
     </section>
   );

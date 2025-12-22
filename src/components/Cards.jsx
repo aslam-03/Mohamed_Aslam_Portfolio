@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import useModal from '../hooks/useModal';
 import SkillIcon from './SkillIcons';
+import MagicCard from './MagicCard';
+
+// Helper to determine glow color based on theme
+// Always use Cyan/Blue (0, 255, 255) for consistent Magic effect
+const getGlowColor = () => '0, 255, 255';
 
 // Certificate Modal Content Component
 const CertificateModalContent = ({ certificateData }) => {
   // Support navigation for 'Other Certification' card
   const isOther = Array.isArray(certificateData.certificates);
   const [current, setCurrent] = useState(isOther ? 0 : 0);
-  
+
   const cert = isOther ? certificateData.certificates[current] : certificateData;
   const { certificateUrl, title, provider, description, date } = cert;
   const isImage = /\.(png|jpg|jpeg|webp)$/i.test(certificateUrl);
@@ -17,7 +22,7 @@ const CertificateModalContent = ({ certificateData }) => {
       setCurrent(current + 1);
     }
   };
-  
+
   const handlePrev = () => {
     if (isOther && current > 0) {
       setCurrent(current - 1);
@@ -29,13 +34,13 @@ const CertificateModalContent = ({ certificateData }) => {
       {/* Left: Certificate Image with animation */}
       <div className="relative flex-1 flex items-center justify-center bg-gray-100 dark:bg-gray-800 p-6 md:p-10 min-w-[300px] rounded-lg">
         {isImage && (
-          <img 
-            src={certificateUrl} 
-            alt="Certificate" 
+          <img
+            src={certificateUrl}
+            alt="Certificate"
             className="max-h-[60vh] w-auto rounded-lg shadow-xl transition-transform"
           />
         )}
-        
+
         {/* Navigation for Other Certification */}
         {isOther && (
           <>
@@ -60,7 +65,7 @@ const CertificateModalContent = ({ certificateData }) => {
           </>
         )}
       </div>
-      
+
       {/* Right: Certificate Details */}
       <div className="flex-1 flex flex-col justify-center p-8 md:p-10 text-left">
         <h3 className="text-2xl md:text-3xl font-bold mb-4 font-press-start text-gray-900 dark:text-white">{title}</h3>
@@ -74,7 +79,7 @@ const CertificateModalContent = ({ certificateData }) => {
 
 const ProjectCard = ({ title, description, technologies, date, theme, getThemeClasses, githubUrl, aboutDetails }) => {
   const { showModal } = useModal();
-  
+
   const handleShowDetails = () => {
     showModal(
       <div>
@@ -85,8 +90,8 @@ const ProjectCard = ({ title, description, technologies, date, theme, getThemeCl
           </p>
           <div className="flex flex-wrap gap-2 mb-4">
             {technologies.map((tech, index) => (
-              <span 
-                key={index} 
+              <span
+                key={index}
                 className={`${getThemeClasses('techTag')} text-xs font-semibold px-3 py-1 rounded-full`}
               >
                 {tech}
@@ -94,11 +99,11 @@ const ProjectCard = ({ title, description, technologies, date, theme, getThemeCl
             ))}
           </div>
         </div>
-        
+
         <div className="text-sm md:text-base text-gray-700 dark:text-gray-200 font-vt323 whitespace-pre-line mb-6">
           {aboutDetails}
         </div>
-        
+
         {githubUrl && (
           <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700 flex justify-end">
             <a
@@ -106,8 +111,8 @@ const ProjectCard = ({ title, description, technologies, date, theme, getThemeCl
               target="_blank"
               rel="noopener noreferrer"
               className={`px-4 py-2 rounded font-bold text-sm transition-colors duration-200 shadow-neon-blue
-                ${theme === 'dark' 
-                  ? 'bg-gray-900 text-white hover:bg-gray-800' 
+                ${theme === 'dark'
+                  ? 'bg-gray-900 text-white hover:bg-gray-800'
                   : 'bg-white text-gray-900 border border-gray-300 hover:bg-gray-100'}`}
               style={{ textDecoration: 'none', minWidth: 120, textAlign: 'center' }}
             >
@@ -118,9 +123,16 @@ const ProjectCard = ({ title, description, technologies, date, theme, getThemeCl
       </div>
     );
   };
-  
+
   return (
-    <div className={`${getThemeClasses('cardBg')} text-left rounded-xl shadow-lg p-8 flex flex-col justify-between h-full transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl`}>
+    <MagicCard
+      className={`${getThemeClasses('cardBg')} text-left rounded-xl shadow-lg p-8 flex flex-col justify-between h-full transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl`}
+      glowColor={getGlowColor(theme)}
+      enableTilt={false}
+      enableMagnetism={false}
+      enableBorderGlow={true}
+      enableParticles={true}
+    >
       <div>
         <h3 className={`${getThemeClasses('cardTitle')} text-xl font-bold mb-3 font-press-start wave-item`}>
           {title}
@@ -133,8 +145,8 @@ const ProjectCard = ({ title, description, technologies, date, theme, getThemeCl
         </p>
         <div className="flex flex-wrap gap-2 mb-4">
           {technologies.map((tech, index) => (
-            <span 
-              key={index} 
+            <span
+              key={index}
               className={`${getThemeClasses('techTag')} text-sm font-semibold px-3 py-1 rounded-full wave-item`}
             >
               {tech}
@@ -149,8 +161,8 @@ const ProjectCard = ({ title, description, technologies, date, theme, getThemeCl
             target="_blank"
             rel="noopener noreferrer"
             className={`px-3 py-1 rounded font-bold text-xs transition-colors duration-200 shadow-neon-blue
-              ${theme === 'dark' 
-                ? 'bg-gray-900 text-white hover:bg-gray-800' 
+              ${theme === 'dark'
+                ? 'bg-gray-900 text-white hover:bg-gray-800'
                 : 'bg-white text-gray-900 border border-gray-300 hover:bg-gray-100'}`}
             style={{ textDecoration: 'none', minWidth: 90, textAlign: 'center' }}
           >
@@ -160,20 +172,27 @@ const ProjectCard = ({ title, description, technologies, date, theme, getThemeCl
         <button
           onClick={handleShowDetails}
           className={`px-3 py-1 rounded font-bold text-xs transition-colors duration-200 shadow-neon-blue ml-auto wave-item
-            ${theme === 'dark' 
-              ? 'bg-gray-900 text-white hover:bg-gray-800' 
+            ${theme === 'dark'
+              ? 'bg-gray-900 text-white hover:bg-gray-800'
               : 'bg-white text-gray-900 border border-gray-300 hover:bg-gray-100'}`}
           style={{ textDecoration: 'none', minWidth: 90, textAlign: 'center' }}
         >
           About Project
         </button>
       </div>
-    </div>
+    </MagicCard>
   );
 };
 
-const ExperienceCard = ({ title, company, duration, achievements, getThemeClasses }) => (
-  <div className={`${getThemeClasses('cardBg')} rounded-xl shadow-lg p-8 transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl`}>
+const ExperienceCard = ({ title, company, duration, achievements, theme, getThemeClasses }) => (
+  <MagicCard
+    className={`${getThemeClasses('cardBg')} rounded-xl shadow-lg p-8 transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl`}
+    glowColor={getGlowColor(theme)}
+    enableTilt={false}
+    enableMagnetism={false}
+    enableBorderGlow={true}
+    enableParticles={true}
+  >
     <h3 className={`${getThemeClasses('cardTitle')} text-2xl font-bold mb-2 font-press-start wave-item`}>
       {title}
     </h3>
@@ -188,10 +207,10 @@ const ExperienceCard = ({ title, company, duration, achievements, getThemeClasse
         <li key={index} className="wave-item">{achievement}</li>
       ))}
     </ul>
-  </div>
+  </MagicCard>
 );
 
-const SkillCard = ({ skill, getThemeClasses }) => {
+const SkillCard = ({ skill, theme, getThemeClasses }) => {
   const words = skill.trim().split(/\s+/);
   const singleWord = words.length === 1;
   const containerStyle = { fontSize: '1rem', padding: '1.25rem', minWidth: 200, width: 'clamp(220px, 24vw, 360px)' };
@@ -199,84 +218,104 @@ const SkillCard = ({ skill, getThemeClasses }) => {
   const multiStyle = { fontSize: '1.02rem', lineHeight: '1.2', whiteSpace: 'normal' };
 
   return (
-    <div
+    <MagicCard
       className={`group ${getThemeClasses('cardBg')} rounded-lg shadow-md p-6 text-center transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl flex flex-col items-center justify-center`}
-      style={containerStyle}
+      glowColor={getGlowColor(theme)}
+      enableTilt={false}
+      enableMagnetism={false}
+      enableBorderGlow={true}
+      enableParticles={true}
+      particleCount={4} // Fewer particles for smaller cards
     >
-      <div
-        className={`${getThemeClasses('skillIconChip')} mb-4 flex h-20 w-20 items-center justify-center rounded-full transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_26px_60px_-32px_rgba(59,130,246,0.50)]`}
-      >
-        <SkillIcon skill={skill} size={46} />
+      <div style={containerStyle} className="flex flex-col items-center justify-center w-full h-full">
+        <div
+          className={`${getThemeClasses('skillIconChip')} mb-4 flex h-20 w-20 items-center justify-center rounded-full transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_26px_60px_-32px_rgba(59,130,246,0.50)]`}
+        >
+          <SkillIcon skill={skill} size={46} />
+        </div>
+        <h3
+          className={`${getThemeClasses('cardTitle')} font-press-start font-semibold`}
+          style={singleWord ? singleStyle : multiStyle}
+        >
+          {singleWord ? (
+            skill
+          ) : (
+            <>
+              <span>{words[0]}</span>
+              <br />
+              <span>{words.slice(1).join(' ')}</span>
+            </>
+          )}
+        </h3>
       </div>
-      <h3
-        className={`${getThemeClasses('cardTitle')} font-press-start font-semibold`}
-        style={singleWord ? singleStyle : multiStyle}
-      >
-        {singleWord ? (
-          skill
-        ) : (
-          <>
-            <span>{words[0]}</span>
-            <br />
-            <span>{words.slice(1).join(' ')}</span>
-          </>
-        )}
-      </h3>
-    </div>
+    </MagicCard>
   );
 };
 
-const ContactInfoItem = ({ icon, label, value, link, getThemeClasses }) => {
+const ContactInfoItem = ({ icon, label, value, link, theme, getThemeClasses }) => {
   const IconComponent = icon;
   return (
-    <div className={`${getThemeClasses('cardBg')} flex items-center space-x-4 p-4 rounded-lg shadow-inner`}>
+    <MagicCard
+      className={`${getThemeClasses('cardBg')} flex items-center space-x-4 p-4 rounded-lg shadow-inner`}
+      glowColor={getGlowColor(theme)}
+      enableTilt={false}
+      enableMagnetism={false}
+      enableBorderGlow={true}
+      enableParticles={true}
+      particleCount={5}
+    >
       <IconComponent size={24} className={`${getThemeClasses('cardTitle')} flex-shrink-0`} />
       <div>
         <p className={`${getThemeClasses('cardDate')} text-sm font-vt323`}>
           {label}
         </p>
-        <a 
-          href={link} 
-          target="_blank" 
-          rel="noopener noreferrer" 
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
           className={`${getThemeClasses('cardText')} text-md font-semibold hover:underline font-vt323`}
         >
           {value}
         </a>
       </div>
-    </div>
+    </MagicCard>
   );
 };
 
 const CertificationCard = ({ title, provider, description, date, theme, getThemeClasses, certificateUrl, certificateData, isOtherCertificate }) => {
   const { showModal } = useModal();
-  
+
   const handleViewCertificate = () => {
     if (!certificateData) return;
-    
+
     // For multi-certificate cards
     if (isOtherCertificate && certificateData.certificates) {
       showModal(
-        <CertificateModalContent 
+        <CertificateModalContent
           certificateData={certificateData}
           theme={theme}
         />
       );
       return;
     }
-    
+
     // For single certificate cards
     showModal(
-      <CertificateModalContent 
+      <CertificateModalContent
         certificateData={certificateData}
         theme={theme}
       />
     );
   };
-  
+
   return (
-    <div
+    <MagicCard
       className={`${getThemeClasses('cardBg')} rounded-xl shadow-lg p-5 h-full transform hover:scale-105 hover:shadow-2xl transition-transform transition-shadow duration-300 ease-out text-left`}
+      glowColor={getGlowColor(theme)}
+      enableTilt={false}
+      enableMagnetism={false}
+      enableBorderGlow={true}
+      enableParticles={true}
     >
       <div className="flex flex-col h-full">
         <div className="flex-grow">
@@ -301,8 +340,8 @@ const CertificationCard = ({ title, provider, description, date, theme, getTheme
             <button
               onClick={handleViewCertificate}
               className={`px-3 py-1 rounded font-bold transition-colors duration-200 text-center shadow-neon-blue text-sm
-                ${theme === 'dark' 
-                  ? 'bg-gray-900 text-white hover:bg-gray-800' 
+                ${theme === 'dark'
+                  ? 'bg-gray-900 text-white hover:bg-gray-800'
                   : 'bg-white text-gray-900 border border-gray-300 hover:bg-gray-100'}`}
               style={{ textDecoration: 'none' }}
             >
@@ -311,13 +350,20 @@ const CertificationCard = ({ title, provider, description, date, theme, getTheme
           )}
         </div>
       </div>
-    </div>
+    </MagicCard>
   );
 };
 
 // Skill Category Card Component
-const SkillCategoryCard = ({ title, skills, tagline, getThemeClasses }) => (
-  <div className={`${getThemeClasses('cardBg')} rounded-xl shadow-lg p-8 transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl text-left`}>
+const SkillCategoryCard = ({ title, skills, tagline, theme, getThemeClasses }) => (
+  <MagicCard
+    className={`${getThemeClasses('cardBg')} rounded-xl shadow-lg p-8 transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-2xl text-left`}
+    glowColor={getGlowColor(theme)}
+    enableTilt={false}
+    enableMagnetism={false}
+    enableBorderGlow={true}
+    enableParticles={true}
+  >
     <div className="flex flex-col h-full">
       <div className="mb-6">
         <h3 className={`${getThemeClasses('cardTitle')} text-2xl font-bold font-press-start mb-2 wave-item`}>
@@ -328,7 +374,7 @@ const SkillCategoryCard = ({ title, skills, tagline, getThemeClasses }) => (
           {tagline}
         </p>
       </div>
-      
+
       <div className="flex-grow">
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
           {skills.map((skill, index) => (
@@ -346,7 +392,7 @@ const SkillCategoryCard = ({ title, skills, tagline, getThemeClasses }) => (
         </div>
       </div>
     </div>
-  </div>
+  </MagicCard>
 );
 
 export { ProjectCard, ExperienceCard, SkillCard, ContactInfoItem, CertificationCard, SkillCategoryCard };

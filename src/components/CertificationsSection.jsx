@@ -7,6 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import MagicCard from './MagicCard';
 
 const certifications = [
   {
@@ -63,6 +64,8 @@ const certifications = [
 const CertificationsSection = ({ theme, getThemeClasses }) => {
   const [api, setApi] = useState(null);
   const [current, setCurrent] = useState(0);
+
+  const glowColor = '0, 255, 255';
 
   useEffect(() => {
     if (!api) {
@@ -131,7 +134,12 @@ const CertificationsSection = ({ theme, getThemeClasses }) => {
               <CarouselContent>
                 {certifications.map((cert, index) => (
                   <CarouselItem key={index}>
-                    <div className={`flex rounded-2xl aspect-[4/3] items-center justify-center p-2 relative overflow-hidden ${theme === 'dark' ? 'bg-gray-800/50' : 'bg-white/50'} border-[1px] ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'} shadow-2xl transition-all duration-500 group`}>
+                    <MagicCard
+                      className={`flex rounded-2xl aspect-[4/3] items-center justify-center p-2 relative overflow-hidden ${theme === 'dark' ? 'bg-gray-800/50' : 'bg-white/50'} border-[1px] ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'} shadow-2xl transition-all duration-500 group`}
+                      glowColor={glowColor}
+                      enableBorderGlow={true}
+                      enableParticles={true}
+                    >
                       {/* Glow Effect */}
                       <div className={`absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-500 ${theme === 'dark' ? 'bg-blue-500/10' : 'bg-blue-200/20'} blur-xl`}></div>
 
@@ -141,7 +149,7 @@ const CertificationsSection = ({ theme, getThemeClasses }) => {
                         className="w-full h-full object-contain z-10 rounded-lg hover:scale-105 transition-transform duration-500"
                         loading="lazy"
                       />
-                    </div>
+                    </MagicCard>
                   </CarouselItem>
                 ))}
               </CarouselContent>
@@ -155,8 +163,8 @@ const CertificationsSection = ({ theme, getThemeClasses }) => {
                   key={idx}
                   onClick={() => api && api.scrollTo(idx)}
                   className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === current
-                      ? (theme === 'dark' ? 'bg-blue-500 w-6' : 'bg-blue-600 w-6')
-                      : (theme === 'dark' ? 'bg-gray-700' : 'bg-gray-300')
+                    ? (theme === 'dark' ? 'bg-blue-500 w-6' : 'bg-blue-600 w-6')
+                    : (theme === 'dark' ? 'bg-gray-700' : 'bg-gray-300')
                     }`}
                   aria-label={`Go to slide ${idx + 1}`}
                 />
