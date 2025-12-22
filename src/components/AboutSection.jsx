@@ -1,3 +1,5 @@
+import TiltedCard from './TiltedCard';
+
 const AboutSection = ({ getThemeClasses }) => (
   <section
     id="about"
@@ -9,12 +11,21 @@ const AboutSection = ({ getThemeClasses }) => (
 
           {/* Image Section */}
           <div
-            className="md:w-1/3 flex-shrink-0 reveal-item"
+            className="md:w-1/3 flex-shrink-0 reveal-item flex justify-center items-center"
           >
-            <img
-              src="/Aslam.jpeg"
-              alt="Aslam"
-              className="rounded-full shadow-lg w-56 h-56 sm:w-64 sm:h-64 object-cover mx-auto border-4 border-gray-400 dark:border-gray-600 hover:scale-105 transition-transform duration-300"
+            <TiltedCard
+              imageSrc="/Aslam.jpeg"
+              altText="Aslam"
+              captionText="Aslam"
+              containerHeight="300px"
+              containerWidth="300px"
+              imageHeight="250px"
+              imageWidth="250px"
+              rotateAmplitude={12}
+              scaleOnHover={1.1}
+              showMobileWarning={false}
+              showTooltip={false}
+              displayOverlayContent={false}
             />
           </div>
 
