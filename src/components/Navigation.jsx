@@ -48,7 +48,7 @@ const Navigation = ({ activeSection, scrollToSection, theme, toggleTheme }) => {
         layout
         className={`
           flex items-center gap-2 sm:gap-4 py-2 px-4 rounded-full shadow-lg border backdrop-blur-md transition-all duration-300
-          bg-white/10 border-white/20 dark:bg-black/20 dark:border-white/10
+          bg-white/70 border-white/20 dark:bg-black/50 dark:border-white/10
         `}
       >
         {/* Mobile Burger Button */}
@@ -87,10 +87,10 @@ const Navigation = ({ activeSection, scrollToSection, theme, toggleTheme }) => {
                 key={item.name}
                 onClick={() => scrollToSection(item.url)}
                 className={`
-                  relative cursor-pointer text-sm font-semibold px-4 py-2 rounded-full transition-colors z-10
+                  relative cursor-pointer text-lg font-medium px-4 py-2 rounded-full transition-colors z-10
                   ${isActive
-                    ? 'text-blue-600 dark:text-cyan-400'
-                    : 'text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-cyan-300'}
+                    ? 'text-blue-700 dark:text-cyan-400'
+                    : 'text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-cyan-300'}
                   font-vt323 tracking-wide
                 `}
               >
@@ -98,7 +98,7 @@ const Navigation = ({ activeSection, scrollToSection, theme, toggleTheme }) => {
                 {isActive && (
                   <motion.div
                     layoutId="lamp"
-                    className="absolute inset-0 w-full bg-blue-500/5 dark:bg-cyan-400/10 rounded-full -z-10"
+                    className="absolute inset-0 w-full bg-blue-500/10 dark:bg-cyan-400/10 rounded-full -z-10"
                     initial={false}
                     transition={{
                       type: "spring",
@@ -106,10 +106,10 @@ const Navigation = ({ activeSection, scrollToSection, theme, toggleTheme }) => {
                       damping: 30,
                     }}
                   >
-                    <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-1 bg-blue-500 dark:bg-cyan-400 rounded-t-full">
-                      <div className="absolute w-12 h-6 bg-blue-500/20 dark:bg-cyan-400/20 rounded-full blur-md -top-2 -left-2" />
-                      <div className="absolute w-8 h-6 bg-blue-500/20 dark:bg-cyan-400/20 rounded-full blur-md -top-1" />
-                      <div className="absolute w-4 h-4 bg-blue-500/20 dark:bg-cyan-400/20 rounded-full blur-sm top-0 left-2" />
+                    <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-1 bg-blue-600 dark:bg-cyan-400 rounded-t-full">
+                      <div className="absolute w-12 h-6 bg-blue-600/20 dark:bg-cyan-400/20 rounded-full blur-md -top-2 -left-2" />
+                      <div className="absolute w-8 h-6 bg-blue-600/20 dark:bg-cyan-400/20 rounded-full blur-md -top-1" />
+                      <div className="absolute w-4 h-4 bg-blue-600/20 dark:bg-cyan-400/20 rounded-full blur-sm top-0 left-2" />
                     </div>
                   </motion.div>
                 )}
