@@ -1,5 +1,6 @@
 
 import { useState, useRef, useEffect } from 'react';
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
 import { Home, User, GraduationCap, Briefcase, Code, Award, Mail } from './Icons';
 import ThemeToggle from './ThemeToggle';

@@ -1,5 +1,5 @@
-import { useRef, useEffect, useState, useCallback } from 'react';
-import { gsap } from 'gsap';
+import { useRef, useEffect, useCallback } from 'react';
+import { gsap } from 'gsap/dist/gsap';
 
 const DEFAULT_PARTICLE_COUNT = 10;
 const DEFAULT_GLOW_COLOR = '132, 0, 255'; // Purple default
