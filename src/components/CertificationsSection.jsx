@@ -153,23 +153,34 @@ const CertificationsSection = ({ theme, getThemeClasses }) => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className={`${theme === 'dark' ? 'bg-gray-900/80 border-gray-700 text-white hover:bg-gray-800' : 'bg-white/80 border-gray-200 text-gray-900 hover:bg-gray-50'} shadow-lg`} />
-              <CarouselNext className={`${theme === 'dark' ? 'bg-gray-900/80 border-gray-700 text-white hover:bg-gray-800' : 'bg-white/80 border-gray-200 text-gray-900 hover:bg-gray-50'} shadow-lg`} />
+              {/* Desktop Only Buttons */}
+              <CarouselPrevious className={`${theme === 'dark' ? 'bg-gray-900/80 border-gray-700 text-white hover:bg-gray-800' : 'bg-white/80 border-gray-200 text-gray-900 hover:bg-gray-50'} shadow-lg hidden lg:flex lg:-left-12`} />
+              <CarouselNext className={`${theme === 'dark' ? 'bg-gray-900/80 border-gray-700 text-white hover:bg-gray-800' : 'bg-white/80 border-gray-200 text-gray-900 hover:bg-gray-50'} shadow-lg hidden lg:flex lg:-right-12`} />
+
+              {/* Mobile Controls & Pagination Dots */}
+              <div className="flex items-center justify-center mt-6 gap-4">
+                {/* Mobile Prev */}
+                <CarouselPrevious className={`${theme === 'dark' ? 'bg-gray-900/80 border-gray-700 text-white hover:bg-gray-800' : 'bg-white/80 border-gray-200 text-gray-900 hover:bg-gray-50'} shadow-lg flex lg:hidden static translate-y-0`} />
+
+                {/* Dots */}
+                <div className="flex gap-2">
+                  {certifications.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => api && api.scrollTo(idx)}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === current
+                        ? (theme === 'dark' ? 'bg-blue-500 w-6' : 'bg-blue-600 w-6')
+                        : (theme === 'dark' ? 'bg-gray-700' : 'bg-gray-300')
+                        }`}
+                      aria-label={`Go to slide ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+
+                {/* Mobile Next */}
+                <CarouselNext className={`${theme === 'dark' ? 'bg-gray-900/80 border-gray-700 text-white hover:bg-gray-800' : 'bg-white/80 border-gray-200 text-gray-900 hover:bg-gray-50'} shadow-lg flex lg:hidden static translate-y-0`} />
+              </div>
             </Carousel>
-            {/* Pagination Dots */}
-            <div className="flex justify-center mt-6 gap-2">
-              {certifications.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => api && api.scrollTo(idx)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === current
-                    ? (theme === 'dark' ? 'bg-blue-500 w-6' : 'bg-blue-600 w-6')
-                    : (theme === 'dark' ? 'bg-gray-700' : 'bg-gray-300')
-                    }`}
-                  aria-label={`Go to slide ${idx + 1}`}
-                />
-              ))}
-            </div>
           </div>
 
         </div>
